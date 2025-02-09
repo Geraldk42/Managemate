@@ -1,0 +1,277 @@
+@* GERALD's *@
+@page "/manager/analytics"
+@layout UserDashboardLayout
+
+<style>
+    .analytics-body {
+        margin-top: 70px;
+        font-family: Arial, sans-serif;
+        background-color: #f5f6fa;
+        color: #fff;
+        /* margin: 0; */
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    /* Search Bar */
+    .search-container {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 15px;
+    }
+
+    .search-container input {
+        padding: 10px;
+        font-size: 16px;
+        width: 50%;
+        max-width: 500px;
+        border: 2px solid #adf0d1;
+        border-radius: 10px;
+    }
+
+    /* Employee Icons Grid */
+    .employee-icons {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 15px;
+        justify-content: center;
+        width: 90%;
+        max-width: 800px;
+    }
+
+    .employee-icon {
+        background-color: #adf0d1;
+        padding: 15px;
+        border-radius: 10px;
+        text-align: center;
+        cursor: pointer;
+        color: #00203f;
+    }
+
+    .employee-icon img {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+    }
+
+    .employee-info p {
+        margin: 5px 0;
+    }
+
+    /* Status Indicator */
+    .status {
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        margin-right: 5px;
+    }
+
+    .status.active {
+        background-color: #2dad9d;
+    }
+
+    .status.inactive {
+        background-color: red;
+    }
+
+    /* Modal */
+    .analytics-modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        justify-content: center;
+        align-items: center;
+    }
+
+    /* Modal-content */
+    .analytics-modal-content {
+        background-color: #adf0d1;
+        padding: 20px;
+        border-radius: 10px;
+        width: 50%;
+        max-width: 600px;
+        max-height: 400px;
+        text-align: center;
+        position: relative;
+    }
+
+    .analytics-modal-content h2 {
+        font-size: 16px;
+        font-weight: bold;
+    }
+
+    /* Side-by-Side Analytics */
+    .charts-container {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+        margin-top: 20px;
+    }
+
+    .charts-container canvas {
+        max-width: 45%;
+        max-height: 200px;
+    }
+
+    /* Close Button - Bottom Right .to be discussed by the guys */
+    .close-btn {
+        position: relative;
+        display: block;
+        margin-left: auto;
+        background-color: #00203f;
+        color: white;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+</style>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js" async defer></script>
+
+
+<div class="analytics-body">
+
+    <div class="search-container">
+        <input type="text" id="searchBar" placeholder="Search Employees..." onkeyup="searchEmployees()">
+    </div>
+
+    <!-- Employee Icons Grid -->
+    <div class="employee-icons" id="employeeList">
+        <!-- Employee icons will be dynamically added here by the js -->
+    </div>
+
+    <!-- Modal  -->
+    <div class="analytics-modal" id="employeeModal">
+        <div class="analytics-modal-content">
+            <h2>Employee Analytics - <span id="employeeName">Gerald</span></h2>
+            <p><strong>Status:</strong> <span id="employeeStatus">Active</span></p>
+            <p><strong>Department:</strong> <span id="employeeDept">Dev</span></p>
+            <p><strong>Total Hours Worked:</strong> <span id="employeeHours">8</span></p>
+
+            <!-- Analytics -->
+            <div class="charts-container">
+                <canvas id="barChartModal"></canvas>
+                <canvas id="donutChartModal"></canvas>
+            </div>
+
+
+            <button class="close-btn" onclick="closeModal()">Close</button>
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+    // Example Employees this wiil store the employee data before we  start getting it from tghe database
+    const employees = [
+        { name: 'Gerald', status: 'Active', dept: 'dev', hours: 8 },
+        { name: 'Bill', status: 'Inactive', dept: 'dev', hours: 0 },
+        { name: 'Chantel', status: 'Active', dept: 'dev', hours: 7 },
+        { name: 'Marie', status: 'Active', dept: 'dev', hours: 9 },
+        { name: 'Gloria', status: 'Inactive', dept: 'dev', hours: 0 },
+        { name: 'Jeff', status: 'Active', dept: 'dev', hours: 7.5 },
+        { name: 'kiragu', status: 'Active', dept: 'dev', hours: 8 },
+        { name: 'james', status: 'Inactive', dept: 'dev', hours: 0 },
+        { name: 'xmumo', status: 'Active', dept: 'dev', hours: 9 },
+        { name: 'fantalite', status: 'Active', dept: 'dev', hours: 8 }
+    ];
+
+    //  shows the Employee Icons
+    function renderEmployees() {
+        const employeeList = document.getElementById('employeeList');
+        employeeList.innerHTML = '';
+
+        employees.forEach(emp => {
+            const statusClass = emp.status.toLowerCase() === 'active' ? 'active' : 'inactive';
+            employeeList.innerHTML += `
+            <div class="employee-icon" onclick="showEmployeeModal('${emp.name}', '${emp.status}', '${emp.dept}', ${emp.hours})">
+                <img src="/images/employee.png" alt="${emp.name}">
+                <div class="employee-info">
+                    <p>${emp.name}</p>
+                    <p><span class="status ${statusClass}"></span> ${emp.status}</p>
+                    <p>${emp.dept}</p>
+                </div>
+            </div>
+        `;
+        });
+    }
+    //facilitates for the search bar
+    function renderEmployees(searchTerm = "") {
+        const employeeList = document.getElementById("employeeList");
+        employeeList.innerHTML = "";
+
+        let filteredEmployees = employees.filter(emp =>
+            emp.name.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+
+        if (filteredEmployees.length === 0) {
+            employeeList.innerHTML = "<p>No employees found.</p>";
+            return;
+        }
+
+        filteredEmployees.forEach(emp => {
+            const statusClass = emp.status.toLowerCase() === "active" ? "active" : "inactive";
+            employeeList.innerHTML += `
+            <div class="employee-icon" onclick="showEmployeeModal('${emp.name}', '${emp.status}', '${emp.dept}', ${emp.hours})">
+                <img src="/images/employee.png" alt="${emp.name}">
+                <div class="employee-info">
+                    <p>${emp.name}</p>
+                    <p><span class="status ${statusClass}"></span> ${emp.status}</p>
+                    <p>${emp.dept}</p>
+                </div>
+            </div>
+        `;
+        });
+    }
+
+    // Function to handle search input
+    function searchEmployees() {
+        const searchTerm = document.getElementById("searchBar").value;
+        renderEmployees(searchTerm);
+    }
+
+    // Initialize employee list on page load
+    renderEmployees();
+
+
+    //  this Shows the  Modal
+    function showEmployeeModal(name, status, dept, hoursWorked) {
+        document.getElementById('employeeName').innerText = name;
+        document.getElementById('employeeStatus').innerText = status;
+        document.getElementById('employeeDept').innerText = dept;
+        document.getElementById('employeeHours').innerText = hoursWorked;
+
+        document.getElementById('employeeModal').style.display = 'flex';
+
+        // Side-by-Side Charts ,good graphics!!
+        new Chart(document.getElementById('barChartModal').getContext('2d'), {
+            type: 'bar',
+            data: { labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'], datasets: [{ label: 'Hours Worked', data: [8, 7.5, 9, 8, 7], backgroundColor: '#2DAD9D' }] },
+            options: { responsive: true }
+        });
+
+        new Chart(document.getElementById('donutChartModal').getContext('2d'), {
+            type: 'doughnut',
+            data: { labels: ['Worked', 'Remaining'], datasets: [{ data: [hoursWorked, 8 - hoursWorked], backgroundColor: ['#00203F', '#ADF0D1'] }] },
+            options: { cutout: '70%' }
+        });
+    }
+
+    // Close Modal
+    function closeModal() {
+        document.getElementById('employeeModal').style.display = 'none';
+    }
+
+    // Initialize Page to the default view
+    renderEmployees();
+
+</script>

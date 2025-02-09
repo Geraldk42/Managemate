@@ -61,8 +61,6 @@
 /home/jeffjames/Documents/DotNet/AppTypesDemo/Managemate/obj/Debug/net9.0/compressed/i4s7di4k4w-h1s4sie4z3.gz
 /home/jeffjames/Documents/DotNet/AppTypesDemo/Managemate/obj/Debug/net9.0/compressed/32dmwr9rjs-63fj8s7r0e.gz
 /home/jeffjames/Documents/DotNet/AppTypesDemo/Managemate/obj/Debug/net9.0/compressed/nygcnl69ee-0j3bgjxly4.gz
-/home/jeffjames/Documents/DotNet/AppTypesDemo/Managemate/obj/Debug/net9.0/compressed/f9idw6jvqs-y4814mx660.gz
-/home/jeffjames/Documents/DotNet/AppTypesDemo/Managemate/obj/Debug/net9.0/compressed/4fcuyhbvfq-y4814mx660.gz
 /home/jeffjames/Documents/DotNet/AppTypesDemo/Managemate/obj/Debug/net9.0/staticwebassets.build.json
 /home/jeffjames/Documents/DotNet/AppTypesDemo/Managemate/obj/Debug/net9.0/staticwebassets.development.json
 /home/jeffjames/Documents/DotNet/AppTypesDemo/Managemate/obj/Debug/net9.0/staticwebassets.build.endpoints.json
@@ -151,3 +149,10 @@
 /home/jeffjames/Documents/DotNet/AppTypesDemo/Managemate/bin/Debug/net9.0/zh-Hant/Microsoft.CodeAnalysis.Workspaces.resources.dll
 /home/jeffjames/Documents/DotNet/AppTypesDemo/Managemate/obj/Debug/net9.0/Managemate.csproj.AssemblyReference.cache
 /home/jeffjames/Documents/DotNet/AppTypesDemo/Managemate/obj/Debug/net9.0/Managemate.csproj.Up2Date
+/home/jeffjames/Documents/DotNet/AppTypesDemo/Managemate/obj/Debug/net9.0/Managemate.sourcelink.json
+/home/jeffjames/Documents/DotNet/AppTypesDemo/Managemate/obj/Debug/net9.0/compressed/r9z5ovnuec-2w4kxq51l4.gz
+/home/jeffjames/Documents/DotNet/AppTypesDemo/Managemate/obj/Debug/net9.0/scopedcss/Components/Layout/NoSidebar.razor.rz.scp.css
+/home/jeffjames/Documents/DotNet/AppTypesDemo/Managemate/obj/Debug/net9.0/scopedcss/Components/Pages/Manager/Analytics.razor.rz.scp.css
+/home/jeffjames/Documents/DotNet/AppTypesDemo/Managemate/obj/Debug/net9.0/compressed/f9idw6jvqs-9j1f4trkur.gz
+/home/jeffjames/Documents/DotNet/AppTypesDemo/Managemate/obj/Debug/net9.0/compressed/4fcuyhbvfq-9j1f4trkur.gz
+/home/jeffjames/Documents/DotNet/AppTypesDemo/Managemate/obj/Debug/net9.0/compressed/quo50wt6gc-319dhwbek6.gz

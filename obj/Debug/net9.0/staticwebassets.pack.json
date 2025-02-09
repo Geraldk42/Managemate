@@ -2,7 +2,7 @@
   "Files": [
     {
       "Id": "/home/jeffjames/Documents/DotNet/AppTypesDemo/Managemate/obj/Debug/net9.0/scopedcss/projectbundle/Managemate.bundle.scp.css",
-      "PackagePath": "staticwebassets/Managemate.y4814mx660.bundle.scp.css"
+      "PackagePath": "staticwebassets/Managemate.9j1f4trkur.bundle.scp.css"
     },
     {
       "Id": "/home/jeffjames/Documents/DotNet/AppTypesDemo/Managemate/wwwroot/app.css",
@@ -11,6 +11,18 @@
     {
       "Id": "/home/jeffjames/Documents/DotNet/AppTypesDemo/Managemate/wwwroot/favicon.png",
       "PackagePath": "staticwebassets/favicon.png"
+    },
+    {
+      "Id": "/home/jeffjames/Documents/DotNet/AppTypesDemo/Managemate/wwwroot/images/employee.png",
+      "PackagePath": "staticwebassets/images/employee.png"
+    },
+    {
+      "Id": "/home/jeffjames/Documents/DotNet/AppTypesDemo/Managemate/wwwroot/js/authentication.js",
+      "PackagePath": "staticwebassets/js/authentication.js"
+    },
+    {
+      "Id": "/home/jeffjames/Documents/DotNet/AppTypesDemo/Managemate/wwwroot/js/cookies.js",
+      "PackagePath": "staticwebassets/js/cookies.js"
     },
     {
       "Id": "/home/jeffjames/Documents/DotNet/AppTypesDemo/Managemate/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.css",

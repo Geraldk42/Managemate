@@ -1,6 +1,7 @@
 using System.Xml.Serialization;
 using Managemate.Components;
 using Managemate.Models;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 
 
@@ -14,6 +15,10 @@ builder.Services.AddDbContext<ManageMateDBConetxt>(options =>
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
+
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie();
 
 var app = builder.Build();
 

@@ -1,0 +1,132 @@
+@page "/manager/tasks"
+@layout UserDashboardLayout
+
+<PageTitle>Manage Tasks</PageTitle>
+
+<style>
+    @*   .tasks-emp-body {
+        margin: 70px auto auto;
+        font-family: Arial, sans-serif;
+        padding: 20px;
+        background-color: #f9f9f9;
+    }
+ *@
+
+    .manage-tasks-section {
+        display: flex;
+        justify-content: space-around;
+        padding: 20px;
+        margin-top: 70px;
+    }
+
+    .task-column {
+        width: 20%;
+        border: 2px solid black;
+        padding: 20px;
+        text-align: center;
+        min-height: 300px;
+        max-height: 400px;
+        overflow-y: auto;
+        /* Enables scrolling */
+        background-color: #f9f9f9;
+    }
+
+    .task {
+        background: white;
+        padding: 10px;
+        margin: 5px 0;
+        border: 1px solid #ccc;
+        cursor: pointer;
+    }
+
+    .task-column h3,
+    .task-column h4,
+    {
+    font-size: 12px;
+    }
+
+    .tasks-emp-modal-content h2 {
+        font-size: 24px;
+        font-weight: bold;
+
+    }
+
+    /* Modal styles */
+    .tasks-emp-modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    .tasks-emp-modal-content {
+        background-color: white;
+        margin: 15% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 30%;
+        text-align: center;
+    }
+
+    .modal-close {
+        color: red;
+        float: right;
+        font-size: 24px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+</style>
+
+<section class="manage-tasks-section">
+    <div class="task-column">
+        <h3>Tasks Assigned</h3>
+        <div class="task">Task 1 - Design Logo</div>
+        <div class="task">Task 2 - Develop API</div>
+        <div class="task">Task 3 - Write Documentation</div>
+        <div class="task">Task 4 - Test System</div>
+        <div class="task">Task 5 - Deploy App</div>
+        <div class="task">Task 6 - Client Review</div>
+    </div>
+    <div class="task-column">
+        <h3>Task Progress</h3>
+        <div class="task" onclick="showTaskDetails('Task 1 - Design Logo', 'John Doe')">Task 1 - Design Logo</div>
+        <div class="task" onclick="showTaskDetails('Task 2 - Develop API', 'Jane Smith')">Task 2 - Develop API</div>
+    </div>
+    <div class="task-column">
+        <h3>Completed Tasks</h3>
+        <div class="task" onclick="showTaskDetails('Task 3 - Write Documentation', 'David Johnson')">Task 3 - Write
+            Documentation</div>
+        <div class="task" onclick="showTaskDetails('Task 4 - Test System', 'Emily Davis')">Task 4 - Test System</div>
+    </div>
+    <div class="task-column">
+        <h3>Reviewed Tasks</h3>
+        <div class="task" onclick="showTaskDetails('Task 5 - Deploy App', 'Michael Brown')">Task 5 - Deploy App</div>
+        <div class="task" onclick="showTaskDetails('Task 6 - Client Review', 'Sarah Wilson')">Task 6 - Client Review
+        </div>
+    </div>
+</section>
+
+<!-- Modal -->
+<div id="taskModal" class="tasks-emp-modal">
+    <div class="tasks-emp-modal-content">
+        <span class="modal-close" onclick="closeModal()">&times;</span>
+        <h2 id="taskTitle"></h2>
+        <p><strong>Assigned Employee:</strong> <span id="taskEmployee"></span></p>
+    </div>
+</div>
+
+<script>
+    function showTaskDetails(task, employee) {
+        document.getElementById("taskTitle").textContent = task;
+        document.getElementById("taskEmployee").textContent = employee;
+        document.getElementById("taskModal").style.display = "block";
+    }
+
+    function closeModal() {
+        document.getElementById("taskModal").style.display = "none";
+    }
+</script>
