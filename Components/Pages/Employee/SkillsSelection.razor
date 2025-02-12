@@ -2,6 +2,11 @@
 @page "/employee/skills"
 @layout UserDashboardLayout
 @rendermode InteractiveServer
+@inject ManageMateDBConetxt DbContext
+@inject IJSRuntime JS
+@inject NavigationManager NavigationManager
+@using Microsoft.EntityFrameworkCore
+@using Managemate.Models
 
 <PageTitle> Skills</PageTitle>
 
@@ -23,6 +28,8 @@
         height: 35px;
         width: 200px;
         border-radius: 10px;
+        background-color: rgb(194, 194, 194);
+        border: none;
     }
 
     .saveSkillsBtn {
@@ -39,10 +46,7 @@
         background-color: aqua;
     }
 
-    .select_button {
-        background-color: rgb(194, 194, 194);
-        border: none;
-    }
+
 
     .select_button:hover {
         background-color: #adf0d1;
@@ -82,7 +86,7 @@
             {
 
                 <li>
-                    <button class="select_button @(selectedSkills.Contains(skill) ? "inclusive" :"")"
+                    <button class="select_button @(selectedSkills.Contains(skill) ? "inclusive" : "")"
                         @onclick="@(e => ToggleSkill(skill))">@skill</button>
                 </li>
 
@@ -93,16 +97,19 @@
     </div>
 
     <div class="d-flex justify-content-center">
-        <a href="/employee/dashboard">
-            <button @@onclick="SaveSkills" class="saveSkillsBtn">Skills My Skills</button>
-        </a>
+        @if (selectedSkills.Any())
+        {
+
+            <a href="/employee/dashboard">
+                <button @onclick="SaveSkills" class="saveSkillsBtn">Save My Skills</button>
+            </a>
+        }
     </div>
 </main>
 
 
 @code {
     private List<string> selectedSkills = new();
-
 
     private List<string> availableSkills = new()
 { "Techincal", "Problem Solving", "Cultural Awareness", "Analytical Thinking", "Customer Focus",
@@ -111,6 +118,25 @@
 
 "Web Hosting", "Attention To Detail", "Time Manaements", "Collaboration", "Time Management", "Leadership",
 "Adaptability" };
+
+
+    private User user = new User();
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            string userId = await JS.InvokeAsync<string>("getCookie", "userId");
+
+            var user = await DbContext.Users.FirstOrDefaultAsync(u => u.UserId == userId);
+
+            if (user != null && !string.IsNullOrEmpty(user.Skills))
+            {
+                selectedSkills = user.Skills.Split(',').ToList();
+                StateHasChanged();
+            }
+        }
+    }
 
 
     private void ToggleSkill(string skill)
@@ -128,6 +154,16 @@
 
     private async Task SaveSkills()
     {
+        string userId = await JS.InvokeAsync<string>("getCookie", "userId");
 
+        var user = await DbContext.Users.FirstOrDefaultAsync(u => u.UserId == userId);
+
+        if (user != null)
+        {
+            user.Skills = string.Join(",", selectedSkills);
+            await DbContext.SaveChangesAsync();
+
+            NavigationManager.NavigateTo("/employee/dashboard");
+        }
     }
 }
