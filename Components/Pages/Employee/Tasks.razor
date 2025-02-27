@@ -1,9 +1,13 @@
 @page "/employee/tasks"
 @layout UserDashboardLayout
-
+@rendermode InteractiveServer
+@inject ManageMateDBConetxt DbContext
+@inject IJSRuntime JS
+@inject NavigationManager NavigationManager
+@using Microsoft.EntityFrameworkCore
+@using Managemate.Models
 
 <PageTitle>Your Tasks</PageTitle>
-
 
 <style>
     .tasks-body {
@@ -72,7 +76,6 @@
         font-size: 16px;
     }
 
-    /* Modal styles */
     .task-modal {
         display: none;
         position: fixed;
@@ -98,63 +101,180 @@
         border-radius: 5px;
         font-size: 16px;
     }
-</style>
 
+
+    .in-progress-btn {
+        background-color: #ADF0D1;
+    }
+
+    .in-progress-btn:hover {
+        background-color: #ADF0D1;
+    }
+
+    .mark-complete-btn {
+        background-color: #2dad9d;
+        margin-right: 13px;
+    }
+
+    .mark-complete-btn:hover {
+        background-color: #2dad9d;
+    }
+</style>
 
 <div class="tasks-body">
     <section class="tasks-container">
         <div class="tasks-column">
-            <h3>ASSIGNED</h3>
-            <div class="task-item" onclick="showTaskDetails('Task 1', 'Assigned on 2024-02-01, Urgent')">Task 1</div>
-            <div class="task-item" onclick="showTaskDetails('Task 2', 'Assigned on 2024-02-02')">Task 2</div>
-            <div class="task-item" onclick="showTaskDetails('Task 3', 'Assigned on 2024-02-03, Urgent')">Task 3</div>
+            <h3>IN PROGRESS</h3>
+            @foreach (var task in userTasks.Where(t => t.Status == STATUSENUM.InProgress))
+            {
+                <div class="task-item">
+                    <h5>@task.Name</h5>
+                    <p class="small">Deadline: @task.Deadline.ToString("MMM dd, yyyy")</p>
+
+                    <button class="btn mark-complete-btn btn-sm" @onclick="() => MarkTaskAsComplete(task)">
+                        Mark as Complete
+                    </button>
+
+                    <button class="btn in-progress-btn btn-sm" @onclick="() => ShowTaskDetails(task)">
+                        View Details
+                    </button>
+
+
+                </div>
+            }
         </div>
 
         <div class="divider"></div>
 
         <div class="tasks-column">
             <h3>COMPLETED</h3>
-            <div class="task-item" onclick="showTaskDetails('Task A', 'Completed on 2024-02-05')">Task A</div>
-            <div class="task-item" onclick="showTaskDetails('Task B', 'Completed on 2024-02-06')">Task B</div>
-        </div>
-
-        <div class="divider"></div>
-
-        <div class="tasks-column ongoing">
-            <h3>ONGOING</h3>
-            <div class="task-item" onclick="showTaskDetails('Ongoing Task', 'Needed by 2024-02-10')">Ongoing Task</div>
-            <div class="tasks-progress">
-                <span class="step" onclick="toggleStep(this)"></span>
-                <span class="step" onclick="toggleStep(this)"></span>
-                <span class="step" onclick="toggleStep(this)"></span>
-                <span class="step" onclick="toggleStep(this)"></span>
-                <span class="step" onclick="toggleStep(this)"></span>
-            </div>
+            @foreach (var task in userTasks.Where(t => t.Status == STATUSENUM.Complete || t.Status ==
+                        STATUSENUM.Reviewed))
+            {
+                <div class="task-item">
+                    <h5>@task.Name</h5>
+                    <div>
+                        @if (task.Status == STATUSENUM.Reviewed && !string.IsNullOrEmpty(task.Review))
+                        {
+                            <button class="btn mark-complete-btn btn-sm" @onclick="() => ShowReview(task)">
+                                See Review
+                            </button>
+                        }
+                        <button class="btn in-progress-btn btn-sm" @onclick="() => ShowTaskDetails(task)">
+                            View Details
+                        </button>
+                    </div>
+                </div>
+            }
         </div>
     </section>
 </div>
 
+@* This one is tha Task Details Modal *@
+@if (showTaskModal && selectedTask != null)
+{
+    <div class="modal show d-block" tabindex="-1" style="background-color: rgba(0,0,0,0.5);">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">@selectedTask.Name</h5>
+                    <button type="button" class="btn-close" @onclick="() => showTaskModal = false"></button>
+                </div>
 
-<!-- Task Details Modal -->
-<div id="taskModal" class="task-modal">
-    <h2 id="taskTitle"></h2>
-    <p id="taskDescription"></p>
-    <button onclick="closeModal()">Close</button>
-</div>
+                <div class="modal-body">
+                    <p><strong>Description:</strong> @selectedTask.Description</p>
+                    <p><strong>Deadline:</strong> @selectedTask.Deadline.ToString("MMM dd, yyyy")</p>
+                    <p><strong>Skills Needed:</strong> @selectedTask.SkillsNeeded</p>
+                    <p><strong>Status:</strong> @selectedTask.Status</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" @onclick="() => showTaskModal = false">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@* This one is tha Review Modal *@
+@if (showReviewModal && selectedTask != null)
+{
+    <div class="modal show d-block" tabindex="-1" style="background-color: rgba(0,0,0,0.5);">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Task Review</h5>
+                    <button type="button" class="btn-close" @onclick="() => showReviewModal = false"></button>
+                </div>
+                <div class="modal-body">
+                    <p class="mb-0">Review from the task-item manager</p>
+                    <q class="text-muted">@selectedTask.Review</q>
+
+                    <div class="d-flex align-items-center gap-2 my-2">
+                        <span class="text-muted">Rating:</span>
+                        <div class="progress" style="height: 20px; width: 100px;">
+                            <div class="progress-bar"
+                                style="width: @(selectedTask.Rating * 25)%; background-color: #2dad9d;">
+                                @selectedTask.Rating/4
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" @onclick="() => showReviewModal = false">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
 
 
-<script>
-    function toggleStep(element) {
-        element.classList.toggle("completed");
+
+@code {
+    private string currentUserId;
+    private List<TaskToDo> userTasks = new();
+    private TaskToDo selectedTask;
+    private bool showTaskModal = false;
+    private bool showReviewModal = false;
+
+    @* This Function is called EVERYTIME the webpage is loaded *@
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            string userId = await JS.InvokeAsync<string>("getCookie", "userId");
+            if (userId != null)
+            {
+                currentUserId = userId;
+                await LoadUserTasks();
+                StateHasChanged();
+            }
+        }
     }
 
-    function showTaskDetails(title, description) {
-        document.getElementById("taskTitle").textContent = title;
-        document.getElementById("taskDescription").textContent = description;
-        document.getElementById("taskModal").style.display = "block";
+    private async Task LoadUserTasks()
+    {
+        userTasks = await DbContext.TasksToDo
+        .Include(t => t.AssignedUsers)
+        .Where(t => t.AssignedUsers.Any(u => u.AssignedEmployeeId == currentUserId))
+        .ToListAsync();
     }
 
-    function closeModal() {
-        document.getElementById("taskModal").style.display = "none";
+    private async Task MarkTaskAsComplete(TaskToDo task)
+    {
+        task.Status = STATUSENUM.Complete;
+        await DbContext.SaveChangesAsync();
+        await LoadUserTasks();
     }
-</script>
+
+    private void ShowTaskDetails(TaskToDo task)
+    {
+        selectedTask = task;
+        showTaskModal = true;
+    }
+
+    private void ShowReview(TaskToDo task)
+    {
+        selectedTask = task;
+        showReviewModal = true;
+    }
+}

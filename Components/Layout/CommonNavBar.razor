@@ -1,8 +1,10 @@
 @* BILL's *@
 
-
-@inject NavigationManager NavigationManager
+@using Managemate.Models
 @inject IJSRuntime JS
+@inject ManageMateDBConetxt DbContext
+@inject NavigationManager NavigationManager
+@using Microsoft.EntityFrameworkCore
 
 @rendermode InteractiveServer
 
@@ -49,11 +51,13 @@
 
     .header_button {
         border-radius: 20px;
-        padding: 7px;
         font-size: 11px;
         height: 30px;
         border-bottom-width: 5px;
         width: 100px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 
     .navbar {
@@ -75,30 +79,32 @@
         <img src="#" alt="LOGO">
     </a>
 
+@if(!string.IsNullOrEmpty(userType) && !string.IsNullOrEmpty(userId)) {
     <ul class="selection">
-        <NavLink class="@GetActiveClass("/profile")" href="/profile" Match="NavLinkMatch.All">
-            Profile
-        </NavLink>
+            <NavLink class="@GetActiveClass("/profile")" href="/profile" Match="NavLinkMatch.All">
+                Profile
+            </NavLink>
 
-        <li>
-            <a href="/@(userType == "TaskManager" ? "manager" : "employee")/tasks">
-                @(userType == "TaskManager" ? "Employee" : "") Tasks
-            </a>
-        </li>
+            <li>
+                <a href="/@(userType == "TaskManager" ? "manager" : "employee")/tasks">
+                    @(userType == "TaskManager" ? "Employee" : "") Tasks
+                </a>
+            </li>
 
-        <li>
-            <a href="/@(userType == "TaskManager" ? "manager" : "employee")/analytics">
-                @(userType == "TaskManager" ? "Employee" : "") Analytics
-            </a>
-        </li>
+            <li>
+                <a href="/@(userType == "TaskManager" ? "manager" : "employee")/analytics">
+                    @(userType == "TaskManager" ? "Employee" : "") Analytics
+                </a>
+            </li>
 
-        <NavLink class="@GetActiveClass("/calendar")" href="/calendar" Match="NavLinkMatch.All">
-            Calendar
-        </NavLink>
+            <NavLink class="@GetActiveClass("/calendar")" href="/calendar" Match="NavLinkMatch.All">
+                Calendar
+            </NavLink>
 
-    </ul>
-    <button class="header_button" @onclick="HandleLogout">@userName</button>
-</div>
+        </ul>
+        <button class="header_button" @onclick="HandleLogout">@userName</button>
+}
+    </div>
 
 
 @code {
@@ -134,11 +140,46 @@
 
     private async Task HandleLogout()
     {
-        await JS.InvokeVoidAsync("deleteCookie", "userId");
-        await JS.InvokeVoidAsync("deleteCookie", "userType");
-        await JS.InvokeVoidAsync("deleteCookie", "email");
+       @*  
+            await JS.InvokeVoidAsync("deleteCookie", "userId");
+            await JS.InvokeVoidAsync("deleteCookie", "userType");
+            await JS.InvokeVoidAsync("deleteCookie", "email");
 
 
-        NavigationManager.NavigateTo("/auth/login", forceLoad: true);
+            NavigationManager.NavigateTo("/auth/login", forceLoad: true);
+        *@
+
+         try
+        {
+            var sessionIdStr = await JS.InvokeAsync<string>("getCookie", "currentSessionId");
+            var userType = await JS.InvokeAsync<string>("getCookie", "userType");
+
+            if (userType == "Employee" && !string.IsNullOrEmpty(sessionIdStr))
+            {
+                if (int.TryParse(sessionIdStr, out int sessionId))
+                {
+                    var session = await DbContext.WorkSessions
+                        .Include(s => s.WorkLog)
+                        .FirstOrDefaultAsync(s => s.Id == sessionId);
+
+                    if (session != null)
+                    {
+                        session.CheckoutTime = DateTime.Now;
+                        var minutesWorked = (int)(session.CheckoutTime.Value - session.CheckInTime).TotalMinutes;
+                        session.WorkLog.TotalMinutesWorked += minutesWorked;
+                        await DbContext.SaveChangesAsync();
+                    }
+                }
+            }
+
+            
+            await JS.InvokeVoidAsync("clearAllCookies");
+            NavigationManager.NavigateTo("/auth/login", forceLoad: true);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error during logout: {ex.Message}");
+            NavigationManager.NavigateTo("/auth/login", forceLoad: true);
+        }
     }
 }

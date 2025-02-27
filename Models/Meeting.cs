@@ -1,5 +1,6 @@
 
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Managemate.Models
 {
@@ -10,6 +11,10 @@ namespace Managemate.Models
         public string Agenda { get; set; }
         public DateTime Date { get; set; }
 
+        public string OwnerId { get; set; }
+
+        [ForeignKey("OwnerId")]
+        public virtual User Owner { get; set; }
         public virtual ICollection<MeetingParticipant> Participants { get; set; }
     }
 }

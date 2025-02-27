@@ -4,6 +4,7 @@ using Managemate.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Managemate.Migrations
 {
     [DbContext(typeof(ManageMateDBConetxt))]
-    partial class ManageMateDBConetxtModelSnapshot : ModelSnapshot
+    [Migration("20250222133622_NewMeetingOwnerIdColumn")]
+    partial class NewMeetingOwnerIdColumn
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -139,9 +142,6 @@ namespace Managemate.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<int?>("Rating")
-                        .HasColumnType("int");
-
                     b.Property<string>("Review")
                         .HasColumnType("longtext");
 
@@ -230,14 +230,17 @@ namespace Managemate.Migrations
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<DateTime>("CheckInTime")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<DateTime>("CheckoutTime")
+                        .HasColumnType("datetime(6)");
+
                     b.Property<string>("EmployeeId")
                         .IsRequired()
                         .HasColumnType("varchar(255)");
 
-                    b.Property<DateTime>("LogDate")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<int>("TotalMinutesWorked")
+                    b.Property<int>("TotalWorkingHours")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -245,30 +248,6 @@ namespace Managemate.Migrations
                     b.HasIndex("EmployeeId");
 
                     b.ToTable("WorkLogs");
-                });
-
-            modelBuilder.Entity("Managemate.Models.WorkSession", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("CheckInTime")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<DateTime?>("CheckoutTime")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<int>("WorkLogId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("WorkLogId");
-
-                    b.ToTable("WorkSessions");
                 });
 
             modelBuilder.Entity("Managemate.Models.DepartmentMember", b =>
@@ -365,17 +344,6 @@ namespace Managemate.Migrations
                     b.Navigation("Employee");
                 });
 
-            modelBuilder.Entity("Managemate.Models.WorkSession", b =>
-                {
-                    b.HasOne("Managemate.Models.WorkLog", "WorkLog")
-                        .WithMany("Sessions")
-                        .HasForeignKey("WorkLogId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("WorkLog");
-                });
-
             modelBuilder.Entity("Managemate.Models.Department", b =>
                 {
                     b.Navigation("Members");
@@ -404,11 +372,6 @@ namespace Managemate.Migrations
                     b.Navigation("MeetingsCreated");
 
                     b.Navigation("WorkLogs");
-                });
-
-            modelBuilder.Entity("Managemate.Models.WorkLog", b =>
-                {
-                    b.Navigation("Sessions");
                 });
 #pragma warning restore 612, 618
         }

@@ -1,4 +1,4 @@
-@page "/manager/analytics"
+@page "/manager/analytics(with charts)"
 @layout UserDashboardLayout
 @rendermode InteractiveServer
 @inject ManageMateDBConetxt DbContext
@@ -8,6 +8,8 @@
 @using System.Text.Json
 
 <PageTitle>Employee Analytics</PageTitle>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
 
 <style>
     .analytics-body {
@@ -87,7 +89,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-   background-color: rgba(0, 0, 0, 0.3);
+   background-color: rgba(0, 0, 0, 0.3); /* Reduced opacity from 0.5 to 0.3 */
     justify-content: center;
     align-items: center;
     z-index: 1000;
@@ -117,7 +119,11 @@
         margin-top: 20px;
     }
 
-  
+    .charts-container canvas {
+        max-width: 45%;
+        max-height: 200px;
+    }
+
     .close-btn {
         position: relative;
         display: block;
@@ -276,13 +282,12 @@ else if (LoggedInUserType == UserType.TaskManager)
             </div>
         }
 
-     
         <div class="analytics-modal" id="employeeModal" style="display: @(showModal ? "flex" : "none")">
             <div class="analytics-modal-content">
                 @if (selectedEmployee != null)
                 {
                     <h2>Employee Analytics - <span id="employeeName">@selectedEmployee.Email.Split('@')[0]</span></h2>
-                    @* <p><strong>Status:</strong> <span id="employeeStatus">@(selectedEmployee.InProgressTasks > 0 ? "Active" : "Inactive")</span></p> *@
+                    <p><strong>Status:</strong> <span id="employeeStatus">@(selectedEmployee.InProgressTasks > 0 ? "Active" : "Inactive")</span></p>
                     <p><strong>Tasks Assigned:</strong> <span id="employeeTasks">@selectedEmployee.TotalTasks</span></p>
                     <p><strong>Completed Tasks:</strong> <span id="employeeCompleted">@selectedEmployee.CompletedTasks</span></p>
                     <p><strong>Total Hours Worked:</strong> <span id="employeeHours">@((selectedEmployee.TotalMinutesWorked / 60.0).ToString("0.0"))</span></p>
@@ -296,13 +301,15 @@ else if (LoggedInUserType == UserType.TaskManager)
                         <p><strong>Average Rating:</strong> <span id="employeeRating">Not yet rated</span></p>
                     }
 
-                  
+                    <div class="charts-container">
+                        <canvas id="barChartModal"></canvas>
+                        <canvas id="donutChartModal"></canvas>
+                    </div>
                 }
 
                 <button class="close-btn" @onclick="CloseModal">Close</button>
             </div>
             
-           @* This onkeyup images for when the user clicks outside. Worked want it top close-btn tha modal *@
             <div  @onclick="CloseModal"></div>
         </div>
 
@@ -310,22 +317,19 @@ else if (LoggedInUserType == UserType.TaskManager)
 }
 else
 {
-    // in case an employee somehow finds himself/herlsef on this page, they sh'd see this message, coz this page is only for TM's
     <div class="alert alert-info m-5">
         Analytics are only available for Task Managers.
     </div>
 }
 
 @code {
-   
-    private bool isLoading = true;   @* This 'isLoading' variable is to indicate whether the data is still being fetched from the DB or nah *@
+    private bool isLoading = true;
     private string LoggedInUserId;
     private UserType LoggedInUserType;
-    private string searchTerm = ""; @* this one is updated as user  *@
+    private string searchTerm = "";
     private bool showModal = false;
     private EmployeeSummary selectedEmployee;
     
-    @* These data memebers hold the analytics data *@
     private List<EmployeeSummary> employeeMetrics = new();
     private List<EmployeeSummary> filteredEmployees = new();
     private int totalTasksCreated;
@@ -333,7 +337,6 @@ else
     private int inProgressTasks;
     private int unassignedTasks;
     
-     @* We create some custom models for employee metrics *@
     private class EmployeeSummary
     {
         public string UserId { get; set; }
@@ -343,6 +346,10 @@ else
         public int InProgressTasks { get; set; }
         public double AverageRating { get; set; }
         public int TotalMinutesWorked { get; set; }
+            
+            
+        @* Placeholder for chart data *@
+        public List<int> DailyHours { get; set; } = new List<int> { 8, 7, 9, 8, 7 };
     }
     
     protected override async Task OnInitializedAsync()
@@ -370,8 +377,6 @@ else
         }
         finally
         {
-
-            @* See 👇👇 where the is loading is coming into action ?? *@
             isLoading = false;
         }
     }
@@ -380,37 +385,28 @@ else
 {
     try
     {
-        @* 1st we need to get ALL tasks that the logged in Task Mng has ever created *@
         var taskManagerTasks = await DbContext.TasksToDo
             .Where(t => t.CreatedById == LoggedInUserId)
             .ToListAsync();
 
         Console.WriteLine($"Found {taskManagerTasks.Count} tasks created by this task manager");
             
-         @* 
-            Then we save/update some counts 
-            i.e No of their tasks that have ever been completed, in progress, assignedm unnassigned, e.t.c
-        *@
         totalTasksCreated = taskManagerTasks.Count;
         completedTasks = taskManagerTasks.Count(t => t.Status == STATUSENUM.Complete || t.Status == STATUSENUM.Reviewed);
         inProgressTasks = taskManagerTasks.Count(t => t.Status == STATUSENUM.InProgress);
         unassignedTasks = taskManagerTasks.Count(t => t.Status == STATUSENUM.UnAssigned);
 
-        @* Get all user tasks for the tasks that have been found, belonging to the logged in Task Manager *@
         var taskIds = taskManagerTasks.Select(t => t.TaskId).ToList();
         
-        @* Find the user task seperately *@
         var userTasks = await DbContext.UserTasks
             .Include(ut => ut.AssignedEmployee)
             .Include(ut => ut.TasksToDo)
             .ToListAsync();
             
-         @* Then filter *@
         userTasks = userTasks.Where(ut => taskIds.Contains(ut.TaskId)).ToList();
         
         Console.WriteLine($"Found {userTasks.Count} task assignments");
 
-        @* Process each employee separately *@
         var groupedByEmployee = userTasks
             .GroupBy(ut => ut.AssignedEmployeeId)
             .ToList();
@@ -436,14 +432,12 @@ else
             var inProgressTasksCount = tasksForEmployee
                 .Count(ut => ut.TasksToDo.Status == STATUSENUM.InProgress);
                 
-            @* Get that particular employee's work logs *@
             var workLogs = await DbContext.WorkLogs
                 .Where(wl => wl.EmployeeId == employeeId)
                 .ToListAsync();
                 
             var totalMinutes = workLogs.Sum(wl => wl.TotalMinutesWorked);
                 
-            @* Calculate average rating *@
             double avgRating = 0;
             var ratedTasks = tasksForEmployee
                 .Where(ut => ut.TasksToDo.Rating.HasValue)
@@ -476,18 +470,40 @@ else
         Console.WriteLine(ex.StackTrace);
     }
 
-    @* This it to check if thete are any employees found *@
     if (!employeeMetrics.Any())
     {
         Console.WriteLine("No employees found. Creating demo data for display.");
-       
+        employeeMetrics = new List<EmployeeSummary>
+        {
+            new EmployeeSummary 
+            { 
+                UserId = "demo1",
+                Email = "employee1@blablabla.com", 
+                TotalTasks = 5,
+                CompletedTasks = 3,
+                InProgressTasks = 2,
+                TotalMinutesWorked = 480,
+                AverageRating = 3.5,
+                DailyHours = new List<int> { 8, 7, 9, 8, 7 }
+            },
+            new EmployeeSummary 
+            { 
+                UserId = "demo2",
+                Email = "employee2@blablabla.com", 
+                TotalTasks = 3,
+                CompletedTasks = 1,
+                InProgressTasks = 2,
+                TotalMinutesWorked = 360,
+                AverageRating = 2.5,
+                DailyHours = new List<int> { 7, 8, 6, 7, 8 }
+            }
+        };
     }
     
     filteredEmployees = employeeMetrics;
 }
 
 
-@* This method is invoked when the user types something in the search bar *@
 private void FilterEmployees()
     {
         if (string.IsNullOrWhiteSpace(searchTerm))
@@ -506,7 +522,41 @@ private void FilterEmployees()
     {
         selectedEmployee = employee;
         showModal = true;
-      
+        
+        @* Jus to give time for charts to load before rendering charts *@
+        await Task.Delay(100);
+        
+        var barChartData = new
+        {
+            labels = new[] { "Mon", "Tue", "Wed", "Thu", "Fri" },
+            datasets = new[]
+            {
+                new
+                {
+                    label = "Hours Worked",
+                    data = employee.DailyHours,
+                    backgroundColor = "#2DAD9D"
+                }
+            }
+        };
+        
+        var donutChartData = new
+        {
+            labels = new[] { "Completed", "In Progress" },
+            datasets = new[]
+            {
+                new
+                {
+                    data = new[] { employee.CompletedTasks, employee.InProgressTasks },
+                    backgroundColor = new[] { "#00203F", "#ADF0D1" }
+                }
+            }
+        };
+        
+        @* Up to this point, can Render the charts using Chart.js *@
+        await JS.InvokeVoidAsync("renderCharts", 
+            JsonSerializer.Serialize(barChartData), 
+            JsonSerializer.Serialize(donutChartData));
     }
     
     private void CloseModal()
@@ -516,4 +566,42 @@ private void FilterEmployees()
 }
 }
 
+@inject IJSRuntime JS
 
+@code {
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+
+            @* Embedded it in blazor fashion equivalent coz using the script was ju giving me heaadaches *@
+            await JS.InvokeVoidAsync("eval", @"
+                function renderCharts(barChartData, donutChartData) {
+                    barChartData = JSON.parse(barChartData);
+                    donutChartData = JSON.parse(donutChartData);
+                    
+                    // Clear existing charts if any
+                    if (window.barChart) window.barChart.destroy();
+                    if (window.donutChart) window.donutChart.destroy();
+                    
+                    const barCtx = document.getElementById('barChartModal').getContext('2d');
+                    window.barChart = new Chart(barCtx, {
+                        type: 'bar',
+                        data: barChartData,
+                        options: { responsive: true }
+                    });
+                    
+                    const donutCtx = document.getElementById('donutChartModal').getContext('2d');
+                    window.donutChart = new Chart(donutCtx, {
+                        type: 'doughnut',
+                        data: donutChartData,
+                        options: { 
+                            cutout: '70%',
+                            responsive: true
+                        }
+                    });
+                }
+            ");
+        }
+    }
+}

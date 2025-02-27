@@ -11,3 +11,10 @@ window.getCookie = function (name) {
 window.deleteCookie = function (name) {
   document.cookie = name + "=; expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/";
 };
+
+window.clearAllCookies = function () {
+  document.cookie.split(";").forEach(function (c) {
+    document.cookie =
+      c.trim() + "=;expires=" + new Date(0).toUTCString() + ";path=/";
+  });
+};

@@ -26,6 +26,8 @@ namespace Managemate.Models
         public virtual ICollection<UserTask> AssignedTasks { get; set; }
         public virtual ICollection<MeetingParticipant> Meetings { get; set; }
         public virtual ICollection<WorkLog> WorkLogs { get; set; }
+        // The meetings that a user has created
+        public virtual ICollection<Meeting> MeetingsCreated { get; set; }
 
         public override string ToString()
         {

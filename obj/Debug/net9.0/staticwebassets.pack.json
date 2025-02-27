@@ -17,6 +17,10 @@
       "PackagePath": "staticwebassets/images/employee.png"
     },
     {
+      "Id": "/home/jeffjames/Documents/DotNet/AppTypesDemo/Managemate/wwwroot/images/profile_vector.png",
+      "PackagePath": "staticwebassets/images/profile_vector.png"
+    },
+    {
       "Id": "/home/jeffjames/Documents/DotNet/AppTypesDemo/Managemate/wwwroot/js/authentication.js",
       "PackagePath": "staticwebassets/js/authentication.js"
     },

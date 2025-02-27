@@ -19,6 +19,7 @@ namespace Managemate.Models
         public string SkillsNeeded { get; set; }
         public STATUSENUM Status { get; set; }
         public string CreatedById { get; set; }
+        public int? Rating { get; set; }
         public string? Review { get; set; }
 
         [ForeignKey("CreatedById")]

@@ -6,21 +6,10 @@
 @inject NavigationManager NavigationManager
 @using Managemate.Models
 @using Microsoft.EntityFrameworkCore
+@using System.ComponentModel.DataAnnotations
 
 
 <PageTitle>Manage Tasks</PageTitle>
-
-<script>
-    function showTaskDetails(task, employee) {
-        document.getElementById("taskTitle").textContent = task;
-        document.getElementById("taskEmployee").textContent = employee;
-        document.getElementById("taskModal").style.display = "block";
-    }
-
-    function closeModal() {
-        document.getElementById("taskModal").style.display = "none";
-    }
-</script>
 
 <style>
     .skill-button {
@@ -93,36 +82,43 @@
         background-color: #2dad9d;
     }
 
-    /* Modal styles */
-    .tasks-emp-modal {
-        display: none;
-        position: fixed;
-        z-index: 1000;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.5);
+     .custom-range {
+        accent-color: #2dad9d;
     }
 
-    .tasks-emp-modal-content {
-        background-color: white;
-        margin: 15% auto;
-        padding: 20px;
-        border: 1px solid #888;
-        width: 30%;
-        text-align: center;
-    }
-
-    .modal-close {
-        color: red;
-        float: right;
-        font-size: 24px;
-        font-weight: bold;
+    .custom-range::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 20px;
+        height: 20px;
+        background: #2dad9d;
+        border-radius: 50%;
         cursor: pointer;
     }
-</style>
 
+    .custom-range::-moz-range-thumb {
+        width: 20px;
+        height: 20px;
+        background: #2dad9d;
+        border-radius: 50%;
+        cursor: pointer;
+        border: none;
+    }
+
+    .custom-range::-webkit-slider-runnable-track {
+        width: 100%;
+        height: 8px;
+        background: #ddd;
+        border-radius: 4px;
+    }
+
+    .custom-range::-moz-range-track {
+        width: 100%;
+        height: 8px;
+        background: #ddd;
+        border-radius: 4px;
+    }
+</style>
 
 <section class="manage-tasks-section">
     <div class="task-column">
@@ -171,10 +167,14 @@
         {
 
             <div class="task border border-success">
-                <div class="d-flex">@task.Name</div>
+                <div class="row">
+                    <div class="col-9">
+                         <div class="d-flex">@task.Name</div>
+                    </div>
 
-                <div>
-                    <button class="btn btn-success btn-small" style="background-color: #00203f;">Review</button>
+                    <div class="col-2">
+                         <button class="btn btn-success btn-small" style="background-color: #00203f;" @onclick="() => ShowReviewModal(task)">Review</button>
+                    </div>
                 </div>
             </div>
         }
@@ -321,13 +321,58 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Task Details</h5>
+                    <h5 class="modal-title">@(isEditing ? "Edit Task" : "Task Details")</h5>
                     <button type="button" class="btn-close" @onclick="CloseDetailsModal"></button>
                 </div>
                 <div class="modal-body">
-                    <div class="mb-3">
-                        <h6 class="text-muted">Task Name</h6>
-                        <p class="fw-bold">@selectedTask.Name</p>
+                       @if (isEditing)
+                    {
+                        <EditForm Model="@editingTask" OnValidSubmit="SaveTaskEdits">
+                            <DataAnnotationsValidator />
+
+                            <div class="mb-3">
+                                <label class="form-label">Task Name</label>
+                                <InputText @bind-Value="editingTask.Name" class="form-control" />
+                                <ValidationMessage For="@(() => editingTask.Name)" />
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Description</label>
+                                <InputTextArea @bind-Value="editingTask.Description" class="form-control" rows="3" />
+                                <ValidationMessage For="@(() => editingTask.Description)" />
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Deadline</label>
+                                <InputDate @bind-Value="editingTask.Deadline" class="form-control" />
+                                <ValidationMessage For="@(() => editingTask.Deadline)" />
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Required Skills</label>
+                                <div class="d-flex flex-wrap gap-2">
+                                    @foreach (var skill in availableSkills)
+                                    {
+                                        <button type="button"
+                                            class="btn skill-button @(selectedSkills.Contains(skill) ? "btn-success selected" : "btn-outline-secondary")"
+                                            @onclick="@(e => ToggleSkill(skill))">
+                                            @skill
+                                        </button>
+                                    }
+                                </div>
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" @onclick="CancelEdit">Cancel</button>
+                                <button type="submit" class="btn btn-primary">Save Changes</button>
+                            </div>
+                        </EditForm>
+                    } else {
+                        <div class="mb-3">
+                        <div class="d-flex gap2">
+                            <div class="text-muted mr-3">Task Name: </div>
+                            <div class="fw-bold">@selectedTask.Name</div>
+                        </div>
                     </div>
 
                     <div class="mb-3">
@@ -379,11 +424,77 @@
                         <div class="mb-3">
                             <h6 class="text-muted">Review</h6>
                             <p>@selectedTask.Review</p>
+                            
+                            <div class="d-flex align-items-center gap-2 mb-2">
+                                <span class="text-muted">Rating:</span>
+                                <div class="progress" style="height: 20px; width: 100px;">
+                                    <div class="progress-bar bg-success" 
+                                        style="width: @(selectedTask.Rating * 25)%">
+                                        @selectedTask.Rating/4
+                                    </div>
+                                </div>
+                            </div>
+  
                         </div>
                     }
+                    }
+                    
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" @onclick="CloseDetailsModal">Close</button>
+
+                 @if (!isEditing){
+                      <div class="modal-footer">
+                        @if (selectedTask.Status == STATUSENUM.UnAssigned)
+                            {
+                                <button type="button" class="btn btn-primary" @onclick="StartEdit">Edit Task</button>
+                                <button type="button" class="btn btn-danger me-2" @onclick="DeleteTask">Delete Task</button>
+                            }
+                        <button type="button" class="btn btn-secondary" @onclick="CloseDetailsModal">Close</button>
+                     </div>
+                 }
+              
+            </div>
+        </div>
+    </div>
+}
+
+ @* Review Modal starts here *@
+
+ @if (showReviewModal && selectedTask != null)
+{
+    <div class="modal show d-block" tabindex="-1" style="background-color: rgba(0,0,0,0.5);">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Review Task: @selectedTask.Name</h5>
+                    <button type="button" class="btn-close" @onclick="CloseReviewModal"></button>
+                </div>
+                <div class="modal-body">
+                    <EditForm Model="@reviewModel" OnValidSubmit="SubmitReview">
+                        <DataAnnotationsValidator />
+
+                        <div class="mb-4">
+                            <label class="form-label">Rating (1-4)</label>
+                            <div class="d-flex align-items-center gap-3">
+                                <input type="range" class="form-range custom-range flex-grow-1" 
+                                    min="1" max="4" step="1"
+                                    style="accent-color: #2dad9d;"
+                                    @bind="reviewModel.Rating" />
+                                <span class="badge" style="background-color: #2dad9d;">@reviewModel.Rating</span>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Review Message</label>
+                            <InputTextArea @bind-Value="reviewModel.Message" 
+                                class="form-control" rows="3" />
+                            <ValidationMessage For="@(() => reviewModel.Message)" />
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" @onclick="CloseReviewModal">Cancel</button>
+                            <button type="submit" class="btn btn-success" style="background-color: #2dad9d;">Submit Review</button>
+                        </div>
+                    </EditForm>
                 </div>
             </div>
         </div>
@@ -422,6 +533,10 @@
             selectedSkills.Add(skill);
         }
     }
+
+
+    private bool isEditing = false;
+    private TaskToDo editingTask = new();
 
 
 
@@ -474,6 +589,49 @@
         };
         selectedSkills.Clear();
     }
+
+
+    private bool showReviewModal = false;
+    private ReviewModel reviewModel = new();
+
+    private class ReviewModel
+    {
+        [Required]
+        [Range(1, 4)]
+        public int Rating { get; set; } = 1;
+        
+        [Required]
+        public string Message { get; set; }
+    }
+
+
+    private void ShowReviewModal(TaskToDo task)
+{
+    selectedTask = task;
+    reviewModel = new ReviewModel();
+    showReviewModal = true;
+}
+
+private async Task SubmitReview()
+{
+    if (selectedTask != null)
+    {
+        selectedTask.Rating = reviewModel.Rating;
+        selectedTask.Review = reviewModel.Message;
+        selectedTask.Status = STATUSENUM.Reviewed;
+
+        await DbContext.SaveChangesAsync();
+        await LoadTasks();
+        CloseReviewModal();
+    }
+}
+
+private void CloseReviewModal()
+{
+    showReviewModal = false;
+    selectedTask = null;
+    reviewModel = new();
+}
 
 
    
@@ -563,12 +721,32 @@
         showDetailsModal = true;
     }
 
+    private async Task DeleteTask()
+{
+    if (selectedTask != null)
+    {
+        try
+        {
+            DbContext.TasksToDo.Remove(selectedTask);
+            await DbContext.SaveChangesAsync();
+            await LoadTasks();
+            CloseDetailsModal();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error deleting task: {ex.Message}");
+        }
+    }
+}
+
 
      private void CloseDetailsModal()
     {
         showDetailsModal = false;
         selectedTask = null;
         assignedEmployee = null;
+        isEditing = false;
+        selectedSkills.Clear();
     }
 
     private string GetStatusColor(STATUSENUM status) => status switch
@@ -579,5 +757,46 @@
         STATUSENUM.Reviewed => "primary",
         _ => "secondary"
     };
+
+    private void StartEdit()
+{
+    editingTask = new TaskToDo
+    {
+        TaskId = selectedTask.TaskId,
+        Name = selectedTask.Name,
+        Description = selectedTask.Description,
+        Deadline = selectedTask.Deadline,
+        Status = selectedTask.Status,
+        CreatedById = selectedTask.CreatedById
+    };
+    
+    selectedSkills = selectedTask.SkillsNeeded?.Split(',').ToList() ?? new();
+    isEditing = true;
+}
+
+private void CancelEdit()
+{
+    isEditing = false;
+    selectedSkills.Clear();
+}
+
+private async Task SaveTaskEdits()
+{
+    if (selectedTask != null)
+    {
+        selectedTask.Name = editingTask.Name;
+        selectedTask.Description = editingTask.Description;
+        selectedTask.Deadline = editingTask.Deadline;
+        selectedTask.SkillsNeeded = string.Join(",", selectedSkills);
+
+        await DbContext.SaveChangesAsync();
+        await LoadTasks();
+        
+        isEditing = false;
+        selectedSkills.Clear();
+        CloseDetailsModal();
+    }
+}
+
 
 }

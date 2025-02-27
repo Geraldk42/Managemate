@@ -217,7 +217,62 @@
             await JSRuntime.InvokeVoidAsync("setCookie", "email", user.Email);
 
 
-            switch (user.UserType)
+            if (user.UserType == UserType.Employee)
+            {
+                try
+                {
+                    var today = DateTime.Today;
+                    var now = DateTime.Now;
+
+                    @*  Get or create today's work log *@
+                    var workLog = await DbContext.WorkLogs
+                    .Include(w => w.Sessions)
+                    .FirstOrDefaultAsync(w =>
+                    w.EmployeeId == user.UserId &&
+                    w.LogDate.Date == today);
+
+                    if (workLog == null)
+                    {
+                        workLog = new WorkLog
+                        {
+                            EmployeeId = user.UserId,
+                            LogDate = today,
+                            Sessions = new List<WorkSession>()
+                        };
+                        DbContext.WorkLogs.Add(workLog);
+                    }
+
+                    @* Add new session *@
+                    var session = new WorkSession
+                    {
+                        CheckInTime = now
+                    };
+                    workLog.Sessions.Add(session);
+
+                    await DbContext.SaveChangesAsync();
+
+                    @* tore session ID in cookie for tracking logout *@
+                    await JSRuntime.InvokeVoidAsync("setCookie", "currentSessionId", session.Id.ToString());
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error logging work time: {ex.Message}");
+                }
+            }
+
+
+
+            if (user.UserType == UserType.Admin)
+            {
+                NavigationManager.NavigateTo("/admin/dashboard", forceLoad: true);
+            }
+            else
+            {
+                NavigationManager.NavigateTo("/profile", forceLoad: true);
+
+            }
+
+            @* switch (user.UserType)
             {
                 case UserType.Employee:
                     NavigationManager.NavigateTo("/employee/dashboard", forceLoad: true);
@@ -228,7 +283,7 @@
                 case UserType.Admin:
                     NavigationManager.NavigateTo("/admin/dashboard", forceLoad: true);
                     break;
-            }
+            } *@
 
         }
         catch (Exception ex)

@@ -108,12 +108,20 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9Ib21lLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
+[/home/jeffjames/Documents/DotNet/AppTypesDemo/Managemate/Components/Pages/Manager/Analytics(with charts).razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9NYW5hZ2VyL0FuYWx5dGljcyh3aXRoIGNoYXJ0cykucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
 [/home/jeffjames/Documents/DotNet/AppTypesDemo/Managemate/Components/Pages/Manager/Dashboard.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9NYW5hZ2VyL0Rhc2hib2FyZC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
 [/home/jeffjames/Documents/DotNet/AppTypesDemo/Managemate/Components/Pages/Manager/TaskManager.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9NYW5hZ2VyL1Rhc2tNYW5hZ2VyLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/jeffjames/Documents/DotNet/AppTypesDemo/Managemate/Components/Pages/Profile copy.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9Qcm9maWxlIGNvcHkucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
 [/home/jeffjames/Documents/DotNet/AppTypesDemo/Managemate/Components/Pages/Profile.razor]

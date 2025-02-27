@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "ymVse3dgf14FB6MHYmJi/VjbcUUrDByV2vU5qQ/iyYU=",
+  "Hash": "W+aQlMk1Yn1zC2woX2B30FLTEDXkmTlEDGolwgIW3xE=",
   "Source": "Managemate",
   "BasePath": "_content/Managemate",
   "Mode": "Default",
@@ -857,12 +857,12 @@
       "OriginalItemSpec": "/home/jeffjames/Documents/DotNet/AppTypesDemo/Managemate/wwwroot/app.css"
     },
     {
-      "Identity": "/home/jeffjames/Documents/DotNet/AppTypesDemo/Managemate/obj/Debug/net9.0/compressed/quo50wt6gc-319dhwbek6.gz",
+      "Identity": "/home/jeffjames/Documents/DotNet/AppTypesDemo/Managemate/obj/Debug/net9.0/compressed/quo50wt6gc-xjb2ylfbol.gz",
       "SourceId": "Managemate",
       "SourceType": "Discovered",
       "ContentRoot": "/home/jeffjames/Documents/DotNet/AppTypesDemo/Managemate/obj/Debug/net9.0/compressed/",
       "BasePath": "_content/Managemate",
-      "RelativePath": "js/cookies#[.{fingerprint=319dhwbek6}]?.js.gz",
+      "RelativePath": "js/cookies#[.{fingerprint=xjb2ylfbol}]?.js.gz",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Alternative",
@@ -871,8 +871,8 @@
       "RelatedAsset": "/home/jeffjames/Documents/DotNet/AppTypesDemo/Managemate/wwwroot/js/cookies.js",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
-      "Fingerprint": "fsgpm89ysx",
-      "Integrity": "PyfX2FauoEFWMFWgnnbYqSuPWuJu+vRJpNK35g7cBl4=",
+      "Fingerprint": "2niykphw2t",
+      "Integrity": "IsXuAeSBn27cTc6PTcS+elW99182A30WvNqLy3yV5zg=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "/home/jeffjames/Documents/DotNet/AppTypesDemo/Managemate/wwwroot/js/cookies.js"
@@ -1151,6 +1151,27 @@
       "OriginalItemSpec": "wwwroot/images/employee.png"
     },
     {
+      "Identity": "/home/jeffjames/Documents/DotNet/AppTypesDemo/Managemate/wwwroot/images/profile_vector.png",
+      "SourceId": "Managemate",
+      "SourceType": "Discovered",
+      "ContentRoot": "/home/jeffjames/Documents/DotNet/AppTypesDemo/Managemate/wwwroot/",
+      "BasePath": "_content/Managemate",
+      "RelativePath": "images/profile_vector#[.{fingerprint}]?.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "kxnfy1bv0p",
+      "Integrity": "6JwQV0HPVmNu914CZL3OlWRVP8Gy7bzXWrqfs+Mew1U=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/images/profile_vector.png"
+    },
+    {
       "Identity": "/home/jeffjames/Documents/DotNet/AppTypesDemo/Managemate/wwwroot/js/authentication.js",
       "SourceId": "Managemate",
       "SourceType": "Discovered",
@@ -1186,8 +1207,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "319dhwbek6",
-      "Integrity": "CTAlqO4LR/7vHsVLeoBrt5NgMrt7qNn16ZXj6tMIgUg=",
+      "Fingerprint": "xjb2ylfbol",
+      "Integrity": "/SwjUmzmQTo3WM5UimNO2uo9M3JJM74DXImRQ2G7Dyc=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/js/cookies.js"
@@ -2581,6 +2602,88 @@
       ]
     },
     {
+      "Route": "images/profile_vector.kxnfy1bv0p.png",
+      "AssetFile": "/home/jeffjames/Documents/DotNet/AppTypesDemo/Managemate/wwwroot/images/profile_vector.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "16669"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"6JwQV0HPVmNu914CZL3OlWRVP8Gy7bzXWrqfs+Mew1U=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 12 Feb 2025 01:00:32 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "kxnfy1bv0p"
+        },
+        {
+          "Name": "label",
+          "Value": "images/profile_vector.png"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-6JwQV0HPVmNu914CZL3OlWRVP8Gy7bzXWrqfs+Mew1U="
+        }
+      ]
+    },
+    {
+      "Route": "images/profile_vector.png",
+      "AssetFile": "/home/jeffjames/Documents/DotNet/AppTypesDemo/Managemate/wwwroot/images/profile_vector.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "16669"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"6JwQV0HPVmNu914CZL3OlWRVP8Gy7bzXWrqfs+Mew1U=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 12 Feb 2025 01:00:32 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-6JwQV0HPVmNu914CZL3OlWRVP8Gy7bzXWrqfs+Mew1U="
+        }
+      ]
+    },
+    {
       "Route": "js/authentication.2w4kxq51l4.js",
       "AssetFile": "/home/jeffjames/Documents/DotNet/AppTypesDemo/Managemate/obj/Debug/net9.0/compressed/r9z5ovnuec-2w4kxq51l4.gz",
       "Selectors": [
@@ -2879,13 +2982,13 @@
       ]
     },
     {
-      "Route": "js/cookies.319dhwbek6.js",
-      "AssetFile": "/home/jeffjames/Documents/DotNet/AppTypesDemo/Managemate/obj/Debug/net9.0/compressed/quo50wt6gc-319dhwbek6.gz",
+      "Route": "js/cookies.js",
+      "AssetFile": "/home/jeffjames/Documents/DotNet/AppTypesDemo/Managemate/obj/Debug/net9.0/compressed/quo50wt6gc-xjb2ylfbol.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.004065040650"
+          "Quality": "0.003164556962"
         }
       ],
       "ResponseHeaders": [
@@ -2895,19 +2998,19 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "245"
+          "Value": "315"
         },
         {
           "Name": "ETag",
-          "Value": "\"PyfX2FauoEFWMFWgnnbYqSuPWuJu+vRJpNK35g7cBl4=\""
+          "Value": "\"IsXuAeSBn27cTc6PTcS+elW99182A30WvNqLy3yV5zg=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 08 Feb 2025 21:32:06 GMT"
+          "Value": "Sat, 22 Feb 2025 22:44:27 GMT"
         },
         {
           "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
+          "Value": "no-cache"
         },
         {
           "Name": "Content-Encoding",
@@ -2923,26 +3026,18 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"CTAlqO4LR/7vHsVLeoBrt5NgMrt7qNn16ZXj6tMIgUg=\""
+          "Value": "W/\"/SwjUmzmQTo3WM5UimNO2uo9M3JJM74DXImRQ2G7Dyc=\""
         }
       ],
       "EndpointProperties": [
         {
-          "Name": "fingerprint",
-          "Value": "319dhwbek6"
-        },
-        {
-          "Name": "label",
-          "Value": "js/cookies.js"
-        },
-        {
           "Name": "integrity",
-          "Value": "sha256-CTAlqO4LR/7vHsVLeoBrt5NgMrt7qNn16ZXj6tMIgUg="
+          "Value": "sha256-/SwjUmzmQTo3WM5UimNO2uo9M3JJM74DXImRQ2G7Dyc="
         }
       ]
     },
     {
-      "Route": "js/cookies.319dhwbek6.js",
+      "Route": "js/cookies.js",
       "AssetFile": "/home/jeffjames/Documents/DotNet/AppTypesDemo/Managemate/wwwroot/js/cookies.js",
       "Selectors": [],
       "ResponseHeaders": [
@@ -2952,7 +3047,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "407"
+          "Value": "601"
         },
         {
           "Name": "Content-Type",
@@ -2960,11 +3055,156 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"CTAlqO4LR/7vHsVLeoBrt5NgMrt7qNn16ZXj6tMIgUg=\""
+          "Value": "\"/SwjUmzmQTo3WM5UimNO2uo9M3JJM74DXImRQ2G7Dyc=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 08 Feb 2025 21:32:06 GMT"
+          "Value": "Sat, 22 Feb 2025 22:44:27 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-/SwjUmzmQTo3WM5UimNO2uo9M3JJM74DXImRQ2G7Dyc="
+        }
+      ]
+    },
+    {
+      "Route": "js/cookies.js.gz",
+      "AssetFile": "/home/jeffjames/Documents/DotNet/AppTypesDemo/Managemate/obj/Debug/net9.0/compressed/quo50wt6gc-xjb2ylfbol.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "315"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"IsXuAeSBn27cTc6PTcS+elW99182A30WvNqLy3yV5zg=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 22 Feb 2025 22:44:27 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-IsXuAeSBn27cTc6PTcS+elW99182A30WvNqLy3yV5zg="
+        }
+      ]
+    },
+    {
+      "Route": "js/cookies.xjb2ylfbol.js",
+      "AssetFile": "/home/jeffjames/Documents/DotNet/AppTypesDemo/Managemate/obj/Debug/net9.0/compressed/quo50wt6gc-xjb2ylfbol.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.003164556962"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "315"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"IsXuAeSBn27cTc6PTcS+elW99182A30WvNqLy3yV5zg=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 22 Feb 2025 22:44:27 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"/SwjUmzmQTo3WM5UimNO2uo9M3JJM74DXImRQ2G7Dyc=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "xjb2ylfbol"
+        },
+        {
+          "Name": "label",
+          "Value": "js/cookies.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-/SwjUmzmQTo3WM5UimNO2uo9M3JJM74DXImRQ2G7Dyc="
+        }
+      ]
+    },
+    {
+      "Route": "js/cookies.xjb2ylfbol.js",
+      "AssetFile": "/home/jeffjames/Documents/DotNet/AppTypesDemo/Managemate/wwwroot/js/cookies.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "601"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"/SwjUmzmQTo3WM5UimNO2uo9M3JJM74DXImRQ2G7Dyc=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 22 Feb 2025 22:44:27 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -2974,7 +3214,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "319dhwbek6"
+          "Value": "xjb2ylfbol"
         },
         {
           "Name": "label",
@@ -2982,13 +3222,13 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-CTAlqO4LR/7vHsVLeoBrt5NgMrt7qNn16ZXj6tMIgUg="
+          "Value": "sha256-/SwjUmzmQTo3WM5UimNO2uo9M3JJM74DXImRQ2G7Dyc="
         }
       ]
     },
     {
-      "Route": "js/cookies.319dhwbek6.js.gz",
-      "AssetFile": "/home/jeffjames/Documents/DotNet/AppTypesDemo/Managemate/obj/Debug/net9.0/compressed/quo50wt6gc-319dhwbek6.gz",
+      "Route": "js/cookies.xjb2ylfbol.js.gz",
+      "AssetFile": "/home/jeffjames/Documents/DotNet/AppTypesDemo/Managemate/obj/Debug/net9.0/compressed/quo50wt6gc-xjb2ylfbol.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -2997,7 +3237,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "245"
+          "Value": "315"
         },
         {
           "Name": "Content-Type",
@@ -3005,11 +3245,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"PyfX2FauoEFWMFWgnnbYqSuPWuJu+vRJpNK35g7cBl4=\""
+          "Value": "\"IsXuAeSBn27cTc6PTcS+elW99182A30WvNqLy3yV5zg=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 08 Feb 2025 21:32:06 GMT"
+          "Value": "Sat, 22 Feb 2025 22:44:27 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -3027,7 +3267,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "319dhwbek6"
+          "Value": "xjb2ylfbol"
         },
         {
           "Name": "label",
@@ -3035,144 +3275,7 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-PyfX2FauoEFWMFWgnnbYqSuPWuJu+vRJpNK35g7cBl4="
-        }
-      ]
-    },
-    {
-      "Route": "js/cookies.js",
-      "AssetFile": "/home/jeffjames/Documents/DotNet/AppTypesDemo/Managemate/obj/Debug/net9.0/compressed/quo50wt6gc-319dhwbek6.gz",
-      "Selectors": [
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip",
-          "Quality": "0.004065040650"
-        }
-      ],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "245"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"PyfX2FauoEFWMFWgnnbYqSuPWuJu+vRJpNK35g7cBl4=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Sat, 08 Feb 2025 21:32:06 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
-        },
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip"
-        },
-        {
-          "Name": "Vary",
-          "Value": "Content-Encoding"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/javascript"
-        },
-        {
-          "Name": "ETag",
-          "Value": "W/\"CTAlqO4LR/7vHsVLeoBrt5NgMrt7qNn16ZXj6tMIgUg=\""
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-CTAlqO4LR/7vHsVLeoBrt5NgMrt7qNn16ZXj6tMIgUg="
-        }
-      ]
-    },
-    {
-      "Route": "js/cookies.js",
-      "AssetFile": "/home/jeffjames/Documents/DotNet/AppTypesDemo/Managemate/wwwroot/js/cookies.js",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "407"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/javascript"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"CTAlqO4LR/7vHsVLeoBrt5NgMrt7qNn16ZXj6tMIgUg=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Sat, 08 Feb 2025 21:32:06 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-CTAlqO4LR/7vHsVLeoBrt5NgMrt7qNn16ZXj6tMIgUg="
-        }
-      ]
-    },
-    {
-      "Route": "js/cookies.js.gz",
-      "AssetFile": "/home/jeffjames/Documents/DotNet/AppTypesDemo/Managemate/obj/Debug/net9.0/compressed/quo50wt6gc-319dhwbek6.gz",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "245"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/javascript"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"PyfX2FauoEFWMFWgnnbYqSuPWuJu+vRJpNK35g7cBl4=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Sat, 08 Feb 2025 21:32:06 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
-        },
-        {
-          "Name": "Content-Encoding",
-          "Value": "gzip"
-        },
-        {
-          "Name": "Vary",
-          "Value": "Content-Encoding"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-PyfX2FauoEFWMFWgnnbYqSuPWuJu+vRJpNK35g7cBl4="
+          "Value": "sha256-IsXuAeSBn27cTc6PTcS+elW99182A30WvNqLy3yV5zg="
         }
       ]
     },
