@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Managemate.Migrations
 {
     [DbContext(typeof(ManageMateDBConetxt))]
-    [Migration("20250208182641_AddedPwd")]
-    partial class AddedPwd
+    [Migration("20250213185551_remodelled")]
+    partial class remodelled
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -137,7 +137,6 @@ namespace Managemate.Migrations
                         .HasColumnType("longtext");
 
                     b.Property<string>("Review")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("SkillsNeeded")

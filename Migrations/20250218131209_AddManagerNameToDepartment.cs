@@ -5,24 +5,25 @@
 namespace Managemate.Migrations
 {
     /// <inheritdoc />
-    public partial class AddedOtp : Migration
+    public partial class AddManagerNameToDepartment : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<int>(
-                name: "Otp",
-                table: "Users",
-                type: "int",
-                nullable: true);
+            migrationBuilder.AddColumn<string>(
+                name: "ManagerName",
+                table: "Departments",
+                type: "longtext",
+                nullable: false)
+                .Annotation("MySql:CharSet", "utf8mb4");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "Otp",
-                table: "Users");
+                name: "ManagerName",
+                table: "Departments");
         }
     }
 }

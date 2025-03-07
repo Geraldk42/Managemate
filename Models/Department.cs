@@ -9,6 +9,8 @@ namespace Managemate.Models
         public int Id { get; set; }
         public string Name { get; set; }
 
+        public string ManagerName { get; set;}
+
         public virtual ICollection<DepartmentMember> Members { get; set; }
         public virtual ICollection<TaskToDo> TasksToDo { get; set; }
     }

@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Managemate.Migrations
 {
     /// <inheritdoc />
-    public partial class AllModelsInPlace : Migration
+    public partial class remodelled : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -53,12 +53,15 @@ namespace Managemate.Migrations
                     UserId = table.Column<string>(type: "varchar(255)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     UserType = table.Column<int>(type: "int", nullable: false),
-                    Email = table.Column<string>(type: "longtext", nullable: false)
+                    Email = table.Column<string>(type: "varchar(255)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Skills = table.Column<string>(type: "longtext", nullable: false)
+                    Skills = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     JoinedOn = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    MinWorkingHours = table.Column<int>(type: "int", nullable: false)
+                    Otp = table.Column<int>(type: "int", nullable: true),
+                    MinWorkingHours = table.Column<int>(type: "int", nullable: false),
+                    Password = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
                 {
@@ -139,7 +142,7 @@ namespace Managemate.Migrations
                     Status = table.Column<int>(type: "int", nullable: false),
                     CreatedById = table.Column<string>(type: "varchar(255)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Review = table.Column<string>(type: "longtext", nullable: false)
+                    Review = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     DepartmentId = table.Column<int>(type: "int", nullable: true)
                 },
@@ -242,6 +245,12 @@ namespace Managemate.Migrations
                 name: "IX_TasksToDo_DepartmentId",
                 table: "TasksToDo",
                 column: "DepartmentId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Users_Email",
+                table: "Users",
+                column: "Email",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_UserTasks_AssignedEmployeeId",

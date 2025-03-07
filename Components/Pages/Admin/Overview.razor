@@ -1,0 +1,75 @@
+@page "/admin/overview"
+@layout AdminDashboardLayout
+@rendermode InteractiveServer
+@using Managemate.Models
+@using Microsoft.EntityFrameworkCore;
+@inject ManageMateDBConetxt DbContext
+@inject NavigationManager Navigation
+
+
+<h3 style="color: #9CEACD;">Overview</h3>
+
+@if (employees == null || taskManagers == null)
+{
+    <p>Loading...</p>
+}
+else
+{
+    <div class="row">
+        <!-- Employees Table -->
+        <div class="col-md-6">
+            <h4>Employees</h4>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>User ID</th>
+                        <th>Email</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var emp in employees)
+                    {
+                        <tr>
+                            <td>@emp.UserId</td>
+                            <td>@emp.Email</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Task Managers Table -->
+        <div class="col-md-6">
+            <h4>Task Managers</h4>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>User ID</th>
+                        <th>Email</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var manager in taskManagers)
+                    {
+                        <tr>
+                            <td>@manager.UserId</td>
+                            <td>@manager.Email</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+}
+
+@code {
+    private List<User> employees;
+    private List<User> taskManagers;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var allUsers = await DbContext.Users.ToListAsync();
+        employees = allUsers.Where(u => u.UserType == UserType.Employee).ToList();
+        taskManagers = allUsers.Where(u => u.UserType == UserType.TaskManager).ToList();
+    }
+}

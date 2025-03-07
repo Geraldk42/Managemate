@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Managemate.Migrations
 {
     [DbContext(typeof(ManageMateDBConetxt))]
-    [Migration("20250208115146_AllModelsInPlace")]
-    partial class AllModelsInPlace
+    [Migration("20250218131209_AddManagerNameToDepartment")]
+    partial class AddManagerNameToDepartment
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -32,6 +32,10 @@ namespace Managemate.Migrations
                         .HasColumnType("int");
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ManagerName")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -137,7 +141,6 @@ namespace Managemate.Migrations
                         .HasColumnType("longtext");
 
                     b.Property<string>("Review")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("SkillsNeeded")
@@ -163,7 +166,7 @@ namespace Managemate.Migrations
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasColumnType("varchar(255)");
 
                     b.Property<DateTime>("JoinedOn")
                         .HasColumnType("datetime(6)");
@@ -171,14 +174,23 @@ namespace Managemate.Migrations
                     b.Property<int>("MinWorkingHours")
                         .HasColumnType("int");
 
-                    b.Property<string>("Skills")
+                    b.Property<int?>("Otp")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Password")
                         .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Skills")
                         .HasColumnType("longtext");
 
                     b.Property<int>("UserType")
                         .HasColumnType("int");
 
                     b.HasKey("UserId");
+
+                    b.HasIndex("Email")
+                        .IsUnique();
 
                     b.ToTable("Users");
                 });
