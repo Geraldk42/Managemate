@@ -60,6 +60,10 @@
             "Pomelo.EntityFrameworkCore.MySql": {
               "target": "Package",
               "version": "[9.0.0-preview.1, )"
+            },
+            "Postmark": {
+              "target": "Package",
+              "version": "[5.2.0, )"
             }
           },
           "imports": [

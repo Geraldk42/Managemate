@@ -156,3 +156,4 @@
 /home/jeffjames/Documents/DotNet/AppTypesDemo/Managemate/obj/Debug/net9.0/compressed/f9idw6jvqs-9j1f4trkur.gz
 /home/jeffjames/Documents/DotNet/AppTypesDemo/Managemate/obj/Debug/net9.0/compressed/4fcuyhbvfq-9j1f4trkur.gz
 /home/jeffjames/Documents/DotNet/AppTypesDemo/Managemate/obj/Debug/net9.0/compressed/quo50wt6gc-xjb2ylfbol.gz
+/home/jeffjames/Documents/DotNet/AppTypesDemo/Managemate/bin/Debug/net9.0/Postmark.dll

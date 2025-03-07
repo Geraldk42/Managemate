@@ -3,6 +3,8 @@
 @page "/auth/signup"
 @layout NoSidebar
 
+@using PostmarkDotNet;
+
 @using Microsoft.AspNetCore.Components.Forms
 @using System.ComponentModel.DataAnnotations
 @using Microsoft.EntityFrameworkCore;
@@ -169,7 +171,6 @@
 
 @code {
     private User user = new User();
-
     private async Task HandleSignUp()
     {
         try
@@ -222,8 +223,9 @@
             DbContext.Users.Add(user);
             await DbContext.SaveChangesAsync();
 
-
             // We will do the sending email baadaye, don worry
+
+            await SendEmail(user.Email, user.Otp ?? 0000);
 
             await JS.InvokeVoidAsync("setCookie", "userId", user.UserId);
             await JS.InvokeVoidAsync("setCookie", "userType", user.UserType.ToString());
@@ -239,6 +241,42 @@
 
             Console.WriteLine($"Error saving user: {ex.Message}");
             await JS.InvokeVoidAsync("alert", $"Error: {ex.Message}");
+        }
+    }
+
+
+
+    private async Task SendEmail(string recipientEmail, int otp)
+    {
+        try
+        {
+
+            var client = new PostmarkClient("e0fa1671-3897-4017-918b-4e7e2e9d2599");
+
+
+            @* the new email message *@
+            var message = new PostmarkMessage
+            {
+                To = user.Email,
+                From = "Managemate <mail@cueaspace.com> ",
+                TrackOpens = true,
+                Subject = "Welcome on board mate!",
+                TextBody = "Use the code below to verify your email.",
+                HtmlBody = $"Use code <strong>{user.Otp}</strong> to verify your email",
+                MessageStream = "outbound",
+                Tag = "Managemate",
+            };
+
+            var sendResult = await client.SendMessageAsync(message);
+
+            if (sendResult.Status != PostmarkStatus.Success)
+            {
+                Console.WriteLine($"Failed to send email: {sendResult.Message}");
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"An error occurred while sending the email: {ex.Message}");
         }
     }
 }
