@@ -7,3 +7,200 @@
 @using Microsoft.EntityFrameworkCore
 
 <PageTitle>Profile</PageTitle>
+
+
+@code {
+    private User? employee;
+    private List<string>? skills;
+    private bool isInitialized = false;
+    private string? userId;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            userId = await JS.InvokeAsync<string>("getCookie", "userId");
+
+            if (!string.IsNullOrEmpty(userId))
+            {
+                employee = await DbContext.Users.FindAsync(userId);
+                skills = employee?.Skills?.Split(',').ToList();
+            }
+
+            isInitialized = true;
+            StateHasChanged(); // Trigger UI update after fetching data
+        }
+    }
+}
+
+<div class="body_div">
+    <div class="employeedetails">
+        <ul class="details_side"> 
+            <li><img src="images/profile_vector.png" alt="profilepic" class="profilevector"></li>
+            <li><strong>Name:</strong> @employee?.Email.Split('@')[0]</li>
+            <li><strong>Email:</strong> @employee?.Email</li>
+            <li><strong>Account Type:</strong> @employee?.UserType</li>
+            <li><strong>Joined On:</strong> @(employee?.JoinedOn.ToString("yyyy-MM-dd") ?? "N/A")</li>
+            <li><strong>Minimum Working Hours:</strong> @(employee?.MinWorkingHours ?? 0) hrs</li>
+        </ul>
+    </div>
+    <div class="relevant_skills">
+    @if (employee?.UserType == UserType.Employee)
+    {
+        <div class="relevantheading">RELEVANT SKILLS:</div>
+        <div class="grid-container">
+            @if (skills != null && skills.Any())
+            {
+                @foreach (var skill in skills)
+                {
+                    <div class="grid-item">@skill</div>
+                }
+            }
+            else
+            {
+                <div class="grid-item">No skills available</div>
+            }
+        </div>
+    }
+    else if (employee?.UserType == UserType.TaskManager)
+    {
+        <div class="relevantheading">EMPLOYEES UNDER MANAGEMENT:</div>
+        <div class="grid-container">
+            @if (DbContext.Users.Any(u => u.UserType == UserType.Employee)) 
+            {
+                @foreach (var emp in DbContext.Users.Where(u => u.UserType == UserType.Employee).ToList())
+                {
+                    <div class="grid-item">@emp.Email.Split('@')[0]</div>
+                }
+            }
+            else
+            {
+                <div class="grid-item">No employees under management</div>
+            }
+        </div>
+    }
+</div>
+
+<!-- Show Edit Button ONLY if the user is an Employee -->
+@if (employee?.UserType == UserType.Employee)
+{
+    <a href="/employee/skills" class="edit-button">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+            <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path>
+        </svg>
+    </a>
+}
+
+</div>
+
+<style>
+.body_div {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 80px;
+    padding: 0 10%;
+}
+
+.employeedetails {
+    width: 40%;
+    padding-right: 20px;
+}
+
+.relevant_skills {
+    width: 40%;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 15px;
+    max-width: 600px;
+}
+
+.grid-item {
+    padding: 12px;
+    background-color: rgba(240, 240, 240, 0.9);
+    border-radius: 30px;
+    text-align: center;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.grid-item:hover {
+    background-color: #ADF0D1;
+    cursor: pointer;
+}
+
+.profilevector {
+    width: 170px;
+    display: block;
+    margin-bottom: 30px;
+}
+
+.details_side {
+    font-size: 20px;
+    list-style-type: none;
+    padding: 0;
+}
+
+.details_side li {
+    margin-bottom: 20px;
+    font-size: 18px;
+}
+
+.relevantheading {
+    font-size: 25px;
+    margin-bottom: 30px;
+    letter-spacing: 1px;
+}
+
+.skills_side {
+    font-size: 18px;
+    list-style-type: none;
+    padding: 0;
+}
+
+.skill_list {
+    padding-top: 15px;
+}
+
+.skill {
+    padding: 12px;
+    background-color: rgba(240, 240, 240, 0.9);
+    border-radius: 30px;
+    text-align: center;
+    font-size: 16px;
+    width: 100%;
+    max-width: 250px;
+    transition: background-color 0.3s ease;
+}
+
+.skill:hover {
+    background-color: #ADF0D1;
+    cursor: pointer;
+}
+
+.edit-button {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background-color: #000;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+
+strong {
+    font-weight: bold;
+    letter-spacing: 0.5px;
+}
+</style>
+
+
+
