@@ -1,4 +1,4 @@
-﻿@* BILL's *@
+@* BILL's *@
 @page "/employee/skills"
 @layout UserDashboardLayout
 @rendermode InteractiveServer
@@ -96,7 +96,7 @@
         @if (selectedSkills.Any())
         {
 
-            <a href="/employee/dashboard">
+            <a href="/profile">
                 <button @onclick="SaveSkills" class="saveSkillsBtn">Save My Skills</button>
             </a>
         }
@@ -159,7 +159,7 @@
             user.Skills = string.Join(",", selectedSkills);
             await DbContext.SaveChangesAsync();
 
-            NavigationManager.NavigateTo("/employee/dashboard");
+            NavigationManager.NavigateTo("/profile");
         }
     }
 }
