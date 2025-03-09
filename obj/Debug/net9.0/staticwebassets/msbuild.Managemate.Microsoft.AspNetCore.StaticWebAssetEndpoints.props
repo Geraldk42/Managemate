@@ -36,6 +36,18 @@
       <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-3ctViDB2sBHb2j0BHszuZpU\u002Ba6niURNMgaxAMCVbl3A="}]]]></EndpointProperties>
       <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=3600, must-revalidate"},{"Name":"Content-Length","Value":"24471"},{"Name":"Content-Type","Value":"image/png"},{"Name":"ETag","Value":"\u00223ctViDB2sBHb2j0BHszuZpU\u002Ba6niURNMgaxAMCVbl3A=\u0022"},{"Name":"Last-Modified","Value":"Wed, 05 Feb 2025 02:37:39 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
+    <StaticWebAssetEndpoint Include="_content/Managemate/images/mm.09e2diklzt.png">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\images\mm.png'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"09e2diklzt"},{"Name":"integrity","Value":"sha256-XBby/f38hYbP8qq3aoHVpdQi15VcIYpRBENglYQowZU="},{"Name":"label","Value":"_content/Managemate/images/mm.png"}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"19123"},{"Name":"Content-Type","Value":"image/png"},{"Name":"ETag","Value":"\u0022XBby/f38hYbP8qq3aoHVpdQi15VcIYpRBENglYQowZU=\u0022"},{"Name":"Last-Modified","Value":"Sun, 09 Mar 2025 18:47:43 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
+    <StaticWebAssetEndpoint Include="_content/Managemate/images/mm.png">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\images\mm.png'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-XBby/f38hYbP8qq3aoHVpdQi15VcIYpRBENglYQowZU="}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=3600, must-revalidate"},{"Name":"Content-Length","Value":"19123"},{"Name":"Content-Type","Value":"image/png"},{"Name":"ETag","Value":"\u0022XBby/f38hYbP8qq3aoHVpdQi15VcIYpRBENglYQowZU=\u0022"},{"Name":"Last-Modified","Value":"Sun, 09 Mar 2025 18:47:43 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/Managemate/images/profile_vector.kxnfy1bv0p.png">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\images\profile_vector.png'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
