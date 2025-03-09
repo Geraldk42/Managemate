@@ -164,7 +164,13 @@
 
 
 @code {
-    private LoginModel loginModel = new();
+    @* private LoginModel loginModel = new(); *@
+
+    private LoginModel loginModel = new LoginModel
+    {
+        UserType = UserType.Employee // Sets Employee as default
+    };
+
 
     private async Task HandleLogin()
     {
