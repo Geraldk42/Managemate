@@ -548,6 +548,8 @@
                         NotificationSent = false
                     });
 
+
+
                     await DbContext.MeetingParticipants.AddRangeAsync(newParticipants);
                     await DbContext.SaveChangesAsync();
                 }

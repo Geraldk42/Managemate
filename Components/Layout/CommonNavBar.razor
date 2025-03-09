@@ -12,7 +12,7 @@
     .navigation {
         display: flex;
         justify-content: space-between;
-        padding: 10px 5px;
+        padding: 10px 25px;
         height: 70px;
         position: fixed;
         top: 0;
@@ -75,8 +75,9 @@
 </style>
 
 <div class="navigation" style="background-color: @(userType == "" || userType == "Employee" ? "#ADF0D1" : "#2dad9d")">
-    <a href="@(userType == "TaskManager" ? "manager" : "employee")/dashboard">
-        <img src="#" alt="LOGO">
+    @* <a href="@(userType == "TaskManager" ? "manager" : "employee")/dashboard"> *@
+     <a href="/profile">
+        <img src="/images/mm.png" alt="LOGO" style="max-width: 75px; height:auto;">
     </a>
 
 @if(!string.IsNullOrEmpty(userType) && !string.IsNullOrEmpty(userId)) {

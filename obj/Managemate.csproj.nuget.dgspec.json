@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/home/jeffjames/Documents/DotNet/AppTypesDemo/Managemate/Managemate.csproj": {}
+    "/home/jeffjames/Documents/DotNet/AppTypesDemo/Managemate advanced/Managemate.csproj": {}
   },
   "projects": {
-    "/home/jeffjames/Documents/DotNet/AppTypesDemo/Managemate/Managemate.csproj": {
+    "/home/jeffjames/Documents/DotNet/AppTypesDemo/Managemate advanced/Managemate.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/jeffjames/Documents/DotNet/AppTypesDemo/Managemate/Managemate.csproj",
+        "projectUniqueName": "/home/jeffjames/Documents/DotNet/AppTypesDemo/Managemate advanced/Managemate.csproj",
         "projectName": "Managemate",
-        "projectPath": "/home/jeffjames/Documents/DotNet/AppTypesDemo/Managemate/Managemate.csproj",
+        "projectPath": "/home/jeffjames/Documents/DotNet/AppTypesDemo/Managemate advanced/Managemate.csproj",
         "packagesPath": "/home/jeffjames/.nuget/packages/",
-        "outputPath": "/home/jeffjames/Documents/DotNet/AppTypesDemo/Managemate/obj/",
+        "outputPath": "/home/jeffjames/Documents/DotNet/AppTypesDemo/Managemate advanced/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/jeffjames/.nuget/NuGet/NuGet.Config"
@@ -60,6 +60,10 @@
             "Pomelo.EntityFrameworkCore.MySql": {
               "target": "Package",
               "version": "[9.0.0-preview.1, )"
+            },
+            "Postmark": {
+              "target": "Package",
+              "version": "[5.2.0, )"
             }
           },
           "imports": [
