@@ -42,7 +42,6 @@
 
         foreach (var user in users)
         {
-            // Skip already hashed passwords (simple check)
             if (user.Password.Length >= 40)
                 continue;
 

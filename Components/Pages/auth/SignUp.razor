@@ -210,8 +210,6 @@
             Console.WriteLine($"NEW OTP ==== {user.Otp}");
             Console.WriteLine("\n");
 
-            // TODO: We should neva eva store password in plain text, but for now we just keep it that way
-            @* user.Password = Hashed Password; *@
 
             Console.WriteLine("After processing:");
             Console.WriteLine($"UserId: {user.UserId}");
@@ -225,7 +223,7 @@
             DbContext.Users.Add(user);
             await DbContext.SaveChangesAsync();
 
-            @* await SendEmail(user.Email, user.Otp ?? 0000); *@
+            await SendEmail(user.Email, user.Otp ?? 0000);
 
             await JS.InvokeVoidAsync("setCookie", "userId", user.UserId);
             await JS.InvokeVoidAsync("setCookie", "userType", user.UserType.ToString());
@@ -280,7 +278,6 @@
         }
     }
 
-    // Simple password hashing method
     private string HashPassword(string password)
     {
         byte[] salt = new byte[16];

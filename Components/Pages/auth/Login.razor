@@ -299,7 +299,7 @@
         }
     }
 
-    // Verify a hashed password
+
     private bool VerifyPassword(string enteredPassword, string storedHash)
     {
         byte[] hashBytes = Convert.FromBase64String(storedHash);
