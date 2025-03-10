@@ -181,115 +181,117 @@
 
 @if (isLoading)
 {
-        <div class="loading-container">
-            <div class="spinner-border spinner" role="status">
-                <span class="visually-hidden">Loading...</span>
-            </div>
+    <div class="loading-container">
+        <div class="spinner-border spinner" role="status">
+            <span class="visually-hidden">Loading...</span>
         </div>
+    </div>
 }
 else
 {
-        <div class="profile-container">
-            <div class="profile-header">
-                <div class="profile-avatar">
-                    @(currentUser?.Email.Substring(0, 1).ToUpper())
-                </div>
-                <div class="profile-info">
-                    <h2>@(currentUser?.Email.Split('@')[0].Replace(".", " "))</h2>
-                    <p>@(currentUser?.Email)</p>
-                    <p>@(currentUserType.ToString()) • Joined @(currentUser?.JoinedOn.ToString("MMMM dd, yyyy"))</p>
-                </div>
+    <div class="profile-container">
+        <div class="profile-header">
+            <div class="profile-avatar">
+                @(currentUser?.Email.Substring(0, 1).ToUpper())
             </div>
-
-            <div class="profile-content">
-                <div class="profile-section">
-                    <h3 class="section-title">Personal Information</h3>
-                
-                    <div class="detail-row">
-                        <div class="detail-label">Full Name:</div>
-                        <div class="detail-value">@(currentUser?.Email.Split('@')[0].Replace(".", " "))</div>
-                    </div>
-                
-                    <div class="detail-row">
-                        <div class="detail-label">Email:</div>
-                        <div class="detail-value">@(currentUser?.Email)</div>
-                    </div>
-                
-                    <div class="detail-row">
-                        <div class="detail-label">User Type:</div>
-                        <div class="detail-value">@(currentUserType)</div>
-                    </div>
-                
-                    <div class="detail-row">
-                        <div class="detail-label">Joined On:</div>
-                        <div class="detail-value">@(currentUser?.JoinedOn.ToString("MMMM dd, yyyy"))</div>
-                    </div>
-                
-                    <div class="detail-row">
-                        <div class="detail-label">Min. Work Hours:</div>
-                        <div class="detail-value">@(currentUser?.MinWorkingHours) hours/week</div>
-                    </div>
-                </div>
-
-                <div class="profile-section">
-                    @if (currentUserType == UserType.Employee)
-                    {
-                            <h3 class="section-title">My Skills</h3>
-                            <div class="skills-container">
-                                @if (mySkills.Count > 0)
-                                {
-                                        @foreach (var skill in mySkills)
-                                        {
-                                                <span class="skill-badge">@skill</span>
-                                        }
-                                }
-                                else
-                                {
-                                        <p>No skills added yet. Click the edit button to add your skills.</p>
-                                }
-                            </div>
-                    }
-                    else if (currentUserType == UserType.TaskManager)
-                    {
-                            <h3 class="section-title">Team Members</h3>
-                    
-                            @if (assignedEmployees.Count > 0)
-                            {
-                                    @foreach (var employee in assignedEmployees)
-                                    {
-                                            <div class="employee-card">
-                                                <div class="employee-name">@employee?.Email?.Split('@')[0]?.Split('.')[0]</div>
-                                                <small class="text-muted">@employee.TaskCount @(employee.TaskCount == 1 ? "Task" : "Tasks") Assigned</small>
-                                
-                                                @if (employee.TaskNames.Any())
-                                                {
-                                                        <div class="employee-tasks">
-                                                            @foreach (var task in employee.TaskNames)
-                                                            {
-                                                                    <span class="task-pill">@task</span>
-                                                            }
-                                                        </div>
-                                                }
-                                            </div>
-                                    }
-                            }
-                            else
-                            {
-                                    <p>No team members assigned yet.</p>
-                            }
-                    }
-                </div>
+            <div class="profile-info">
+                <h2>@(currentUser?.Email.Split('@')[0].Replace(".", " "))</h2>
+                <p>@(currentUser?.Email)</p>
+                <p>@(currentUserType.ToString()) • Joined @(currentUser?.JoinedOn.ToString("MMMM dd, yyyy"))</p>
             </div>
         </div>
+
+        <div class="profile-content">
+            <div class="profile-section">
+                <h3 class="section-title">Personal Information</h3>
+
+                <div class="detail-row">
+                    <div class="detail-label">Full Name:</div>
+                    <div class="detail-value">@(currentUser?.Email.Split('@')[0].Replace(".", " "))</div>
+                </div>
+
+                <div class="detail-row">
+                    <div class="detail-label">Email:</div>
+                    <div class="detail-value">@(currentUser?.Email)</div>
+                </div>
+
+                <div class="detail-row">
+                    <div class="detail-label">User Type:</div>
+                    <div class="detail-value">@(currentUserType)</div>
+                </div>
+
+                <div class="detail-row">
+                    <div class="detail-label">Joined On:</div>
+                    <div class="detail-value">@(currentUser?.JoinedOn.ToString("MMMM dd, yyyy"))</div>
+                </div>
+
+                <div class="detail-row">
+                    <div class="detail-label">Min. Work Hours:</div>
+                    <div class="detail-value">@(currentUser?.MinWorkingHours) hours/week</div>
+                </div>
+            </div>
+
+            <div class="profile-section">
+                @if (currentUserType == UserType.Employee)
+                {
+                    <h3 class="section-title">My Skills</h3>
+                    <div class="skills-container">
+                        @if (mySkills.Count > 0)
+                        {
+                            @foreach (var skill in mySkills)
+                            {
+                                <span class="skill-badge">@skill</span>
+                            }
+                        }
+                        else
+                        {
+                            <p>No skills added yet. Click the edit button to add your skills.</p>
+                        }
+                    </div>
+                }
+                else if (currentUserType == UserType.TaskManager)
+                {
+                    <h3 class="section-title">Employees you manage</h3>
+
+                    @if (assignedEmployees.Count > 0)
+                    {
+                        @foreach (var employee in assignedEmployees)
+                        {
+                            <div class="employee-card">
+                                <div class="employee-name">@employee?.Email?.Split('@')[0]?.Split('.')[0]</div>
+                                <small class="text-muted">@employee.TaskCount @(employee.TaskCount == 1 ? "Task" : "Tasks")
+                                    Assigned</small>
+
+                                @if (employee.TaskNames.Any())
+                                {
+                                    <div class="employee-tasks">
+                                        @foreach (var task in employee.TaskNames)
+                                        {
+                                            <span class="task-pill">@task</span>
+                                        }
+                                    </div>
+                                }
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <p>No employees under yout management.</p>
+                    }
+                }
+            </div>
+        </div>
+    </div>
 }
 
 @if (currentUserType == UserType.Employee)
 {
-        <NavLink href="/employee/skills" class="edit-button">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                <path fill="currentColor" d="M5 19h1.425L16.2 9.225L14.775 7.8L5 17.575zm-2 2v-4.25L17.625 2.175L21.8 6.45L7.25 21zM19 6.4L17.6 5zm-3.525 2.125l-.7-.725L16.2 9.225z" />
-            </svg>
-        </NavLink>
+    <NavLink href="/employee/skills" class="edit-button">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+            <path fill="currentColor"
+                d="M5 19h1.425L16.2 9.225L14.775 7.8L5 17.575zm-2 2v-4.25L17.625 2.175L21.8 6.45L7.25 21zM19 6.4L17.6 5zm-3.525 2.125l-.7-.725L16.2 9.225z" />
+        </svg>
+    </NavLink>
 }
 
 
