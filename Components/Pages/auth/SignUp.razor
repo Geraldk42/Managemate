@@ -204,6 +204,8 @@
             user.JoinedOn = DateTime.UtcNow;
             user.Otp = new Random().Next(1000, 9999);
 
+            user.Password = HashPassword(user.Password);
+
             Console.WriteLine("\n");
             Console.WriteLine($"NEW OTP ==== {user.Otp}");
             Console.WriteLine("\n");
@@ -223,9 +225,7 @@
             DbContext.Users.Add(user);
             await DbContext.SaveChangesAsync();
 
-            // We will do the sending email baadaye, don worry
-
-            await SendEmail(user.Email, user.Otp ?? 0000);
+            @* await SendEmail(user.Email, user.Otp ?? 0000); *@
 
             await JS.InvokeVoidAsync("setCookie", "userId", user.UserId);
             await JS.InvokeVoidAsync("setCookie", "userType", user.UserType.ToString());
@@ -278,5 +278,25 @@
         {
             Console.WriteLine($"An error occurred while sending the email: {ex.Message}");
         }
+    }
+
+    // Simple password hashing method
+    private string HashPassword(string password)
+    {
+        byte[] salt = new byte[16];
+        using (var rng = System.Security.Cryptography.RandomNumberGenerator.Create())
+        {
+            rng.GetBytes(salt);
+        }
+
+        var pbkdf2 = new System.Security.Cryptography.Rfc2898DeriveBytes(
+        password, salt, 10000);
+        byte[] hash = pbkdf2.GetBytes(20);
+
+        byte[] hashBytes = new byte[36];
+        Array.Copy(salt, 0, hashBytes, 0, 16);
+        Array.Copy(hash, 0, hashBytes, 16, 20);
+
+        return Convert.ToBase64String(hashBytes);
     }
 }

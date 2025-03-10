@@ -204,13 +204,19 @@
                 return;
             }
 
+            if (!VerifyPassword(loginModel.Password, user.Password))
+            {
+                await JSRuntime.InvokeVoidAsync("alert", "Invalid email or password.");
+                return;
+            }
 
-            if (user.Password != loginModel.Password)
+
+            @* if (user.Password != loginModel.Password)
             {
 
                 await JSRuntime.InvokeVoidAsync("alert", "Invalid email or password.");
                 return;
-            }
+            } *@
 
             await JSRuntime.InvokeVoidAsync("setCookie", "userId", user.UserId);
             await JSRuntime.InvokeVoidAsync("setCookie", "userType", user.UserType.ToString());
@@ -291,6 +297,26 @@
             Console.WriteLine($"Error during login: {ex.Message}");
             await JSRuntime.InvokeVoidAsync("alert", "An error occurred during login.");
         }
+    }
+
+    // Verify a hashed password
+    private bool VerifyPassword(string enteredPassword, string storedHash)
+    {
+        byte[] hashBytes = Convert.FromBase64String(storedHash);
+
+        byte[] salt = new byte[16];
+        Array.Copy(hashBytes, 0, salt, 0, 16);
+
+        var pbkdf2 = new System.Security.Cryptography.Rfc2898DeriveBytes(
+        enteredPassword, salt, 10000);
+        byte[] hash = pbkdf2.GetBytes(20);
+
+        for (int i = 0; i < 20; i++)
+        {
+            if (hashBytes[i + 16] != hash[i])
+                return false;
+        }
+        return true;
     }
 
     public class LoginModel

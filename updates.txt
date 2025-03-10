@@ -1,4 +1,30 @@
 Added postmart
 
-
 dotnet add package Postmark
+
+
+Components/Layout/CommonFooter.razor
+
+Components/Layout/MainLayout.razor
+
+Components/Layout/UserDashboardLayout.razor
+
+Components/Layout/UserDashboardLayout.razor
+
+Components/Layout/NoSidebar.razor
+
+Components/Pages/auth/SignUp.razor
+
+
+Components/Layout/UserDashboardLayout.razor
+
+
+Components/Layout/NoSidebar.razor
+
+
+Components/Pages/Employee/SkillsSelection.razor
+
+Components/Pages/auth/Login.razor
+
+
+Components/Pages/Admin/HashPwds.razor

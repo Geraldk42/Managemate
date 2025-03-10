@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "eXDlh/IddIM=",
+  "dgSpecHash": "EYIYaKrfg+Q=",
   "success": true,
-  "projectFilePath": "/home/jeffjames/Documents/DotNet/AppTypesDemo/Managemate advanced/Managemate.csproj",
+  "projectFilePath": "/home/jeffjames/Documents/DotNet/AppTypesDemo/Managemate/Managemate.csproj",
   "expectedPackageFiles": [
     "/home/jeffjames/.nuget/packages/humanizer.core/2.14.1/humanizer.core.2.14.1.nupkg.sha512",
     "/home/jeffjames/.nuget/packages/microsoft.bcl.asyncinterfaces/6.0.0/microsoft.bcl.asyncinterfaces.6.0.0.nupkg.sha512",

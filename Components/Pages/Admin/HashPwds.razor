@@ -1,0 +1,55 @@
+@page "/admin/update-passwords"
+@using Managemate.Models
+@using Microsoft.EntityFrameworkCore
+@inject ManageMateDBConetxt DbContext
+@rendermode InteractiveServer
+
+<div class="container mt-4">
+    <h2>Update Passwords</h2>
+    <button class="btn btn-primary" @onclick="UpdateAllPasswords">Hash All Passwords</button>
+
+    @if (isComplete)
+    {
+        <div class="alert alert-success mt-3">Passwords updated successfully!</div>
+    }
+</div>
+
+@code {
+    private bool isComplete = false;
+
+    private string HashPassword(string password)
+    {
+        byte[] salt = new byte[16];
+        using (var rng = System.Security.Cryptography.RandomNumberGenerator.Create())
+        {
+            rng.GetBytes(salt);
+        }
+
+        var pbkdf2 = new System.Security.Cryptography.Rfc2898DeriveBytes(
+        password, salt, 10000);
+        byte[] hash = pbkdf2.GetBytes(20);
+
+        byte[] hashBytes = new byte[36];
+        Array.Copy(salt, 0, hashBytes, 0, 16);
+        Array.Copy(hash, 0, hashBytes, 16, 20);
+
+        return Convert.ToBase64String(hashBytes);
+    }
+
+    private async Task UpdateAllPasswords()
+    {
+        var users = await DbContext.Users.ToListAsync();
+
+        foreach (var user in users)
+        {
+            // Skip already hashed passwords (simple check)
+            if (user.Password.Length >= 40)
+                continue;
+
+            user.Password = HashPassword(user.Password);
+        }
+
+        await DbContext.SaveChangesAsync();
+        isComplete = true;
+    }
+}

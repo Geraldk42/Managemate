@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/home/jeffjames/Documents/DotNet/AppTypesDemo/Managemate advanced/Managemate.csproj": {}
+    "/home/jeffjames/Documents/DotNet/AppTypesDemo/Managemate/Managemate.csproj": {}
   },
   "projects": {
-    "/home/jeffjames/Documents/DotNet/AppTypesDemo/Managemate advanced/Managemate.csproj": {
+    "/home/jeffjames/Documents/DotNet/AppTypesDemo/Managemate/Managemate.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/jeffjames/Documents/DotNet/AppTypesDemo/Managemate advanced/Managemate.csproj",
+        "projectUniqueName": "/home/jeffjames/Documents/DotNet/AppTypesDemo/Managemate/Managemate.csproj",
         "projectName": "Managemate",
-        "projectPath": "/home/jeffjames/Documents/DotNet/AppTypesDemo/Managemate advanced/Managemate.csproj",
+        "projectPath": "/home/jeffjames/Documents/DotNet/AppTypesDemo/Managemate/Managemate.csproj",
         "packagesPath": "/home/jeffjames/.nuget/packages/",
-        "outputPath": "/home/jeffjames/Documents/DotNet/AppTypesDemo/Managemate advanced/obj/",
+        "outputPath": "/home/jeffjames/Documents/DotNet/AppTypesDemo/Managemate/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/jeffjames/.nuget/NuGet/NuGet.Config"
