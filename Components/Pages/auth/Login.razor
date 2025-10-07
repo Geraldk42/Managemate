@@ -196,13 +196,13 @@
                 await JSRuntime.InvokeVoidAsync("alert", "Account not found.");
                 return;
             }
-
+@* 
             if (user.UserType != loginModel.UserType)
             {
 
                 await JSRuntime.InvokeVoidAsync("alert", "No account for this user type");
                 return;
-            }
+            } *@
 
             if (!VerifyPassword(loginModel.Password, user.Password))
             {
@@ -211,12 +211,12 @@
             }
 
 
-            @* if (user.Password != loginModel.Password)
+            if (user.Password != loginModel.Password)
             {
 
                 await JSRuntime.InvokeVoidAsync("alert", "Invalid email or password.");
                 return;
-            } *@
+            }
 
             await JSRuntime.InvokeVoidAsync("setCookie", "userId", user.UserId);
             await JSRuntime.InvokeVoidAsync("setCookie", "userType", user.UserType.ToString());

@@ -9,161 +9,157 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = Managemate
 build_property.RootNamespace = Managemate
-build_property.ProjectDir = /home/jeffjames/Documents/DotNet/AppTypesDemo/Managemate/
+build_property.ProjectDir = C:\Users\gathu\Managemate\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 9.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = /home/jeffjames/Documents/DotNet/AppTypesDemo/Managemate
+build_property.MSBuildProjectDirectory = C:\Users\gathu\Managemate
 build_property._RazorSourceGeneratorDebug = 
 build_property.EffectiveAnalysisLevelStyle = 9.0
 build_property.EnableCodeStyleSeverity = 
 
-[/home/jeffjames/Documents/DotNet/AppTypesDemo/Managemate/Components/App.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9BcHAucmF6b3I=
+[C:/Users/gathu/Managemate/Components/App.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xBcHAucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/jeffjames/Documents/DotNet/AppTypesDemo/Managemate/Components/Layout/AdminDashboardLayout.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9MYXlvdXQvQWRtaW5EYXNoYm9hcmRMYXlvdXQucmF6b3I=
+[C:/Users/gathu/Managemate/Components/Layout/AdminDashboardLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xMYXlvdXRcQWRtaW5EYXNoYm9hcmRMYXlvdXQucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/jeffjames/Documents/DotNet/AppTypesDemo/Managemate/Components/Layout/AdminLogoutBtn.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9MYXlvdXQvQWRtaW5Mb2dvdXRCdG4ucmF6b3I=
+[C:/Users/gathu/Managemate/Components/Layout/AdminLogoutBtn.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xMYXlvdXRcQWRtaW5Mb2dvdXRCdG4ucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/jeffjames/Documents/DotNet/AppTypesDemo/Managemate/Components/Layout/AuthLayout.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9MYXlvdXQvQXV0aExheW91dC5yYXpvcg==
+[C:/Users/gathu/Managemate/Components/Layout/AuthLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xMYXlvdXRcQXV0aExheW91dC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/jeffjames/Documents/DotNet/AppTypesDemo/Managemate/Components/Layout/CommonFooter.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9MYXlvdXQvQ29tbW9uRm9vdGVyLnJhem9y
+[C:/Users/gathu/Managemate/Components/Layout/CommonFooter.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xMYXlvdXRcQ29tbW9uRm9vdGVyLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/jeffjames/Documents/DotNet/AppTypesDemo/Managemate/Components/Layout/CommonNavBar.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9MYXlvdXQvQ29tbW9uTmF2QmFyLnJhem9y
+[C:/Users/gathu/Managemate/Components/Layout/CommonNavBar.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xMYXlvdXRcQ29tbW9uTmF2QmFyLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/jeffjames/Documents/DotNet/AppTypesDemo/Managemate/Components/Layout/UserDashboardLayout.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9MYXlvdXQvVXNlckRhc2hib2FyZExheW91dC5yYXpvcg==
+[C:/Users/gathu/Managemate/Components/Layout/UserDashboardLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xMYXlvdXRcVXNlckRhc2hib2FyZExheW91dC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/jeffjames/Documents/DotNet/AppTypesDemo/Managemate/Components/Pages/Admin/Departments.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9BZG1pbi9EZXBhcnRtZW50cy5yYXpvcg==
+[C:/Users/gathu/Managemate/Components/Pages/Admin/Departments.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xBZG1pblxEZXBhcnRtZW50cy5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/jeffjames/Documents/DotNet/AppTypesDemo/Managemate/Components/Pages/Admin/HashPwds.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9BZG1pbi9IYXNoUHdkcy5yYXpvcg==
+[C:/Users/gathu/Managemate/Components/Pages/Admin/Overview.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xBZG1pblxPdmVydmlldy5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/jeffjames/Documents/DotNet/AppTypesDemo/Managemate/Components/Pages/Admin/Overview.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9BZG1pbi9PdmVydmlldy5yYXpvcg==
+[C:/Users/gathu/Managemate/Components/Pages/Admin/Reports.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xBZG1pblxSZXBvcnRzLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/jeffjames/Documents/DotNet/AppTypesDemo/Managemate/Components/Pages/Admin/Reports.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9BZG1pbi9SZXBvcnRzLnJhem9y
+[C:/Users/gathu/Managemate/Components/Pages/Admin/UserDetails.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xBZG1pblxVc2VyRGV0YWlscy5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/jeffjames/Documents/DotNet/AppTypesDemo/Managemate/Components/Pages/Admin/UserDetails.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9BZG1pbi9Vc2VyRGV0YWlscy5yYXpvcg==
+[C:/Users/gathu/Managemate/Components/Pages/Admin/Workinghours.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xBZG1pblxXb3JraW5naG91cnMucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/jeffjames/Documents/DotNet/AppTypesDemo/Managemate/Components/Pages/Admin/Workinghours.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9BZG1pbi9Xb3JraW5naG91cnMucmF6b3I=
+[C:/Users/gathu/Managemate/Components/Pages/auth/Login.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xhdXRoXExvZ2luLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/jeffjames/Documents/DotNet/AppTypesDemo/Managemate/Components/Pages/auth/Login.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9hdXRoL0xvZ2luLnJhem9y
+[C:/Users/gathu/Managemate/Components/Pages/auth/SignUp.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xhdXRoXFNpZ25VcC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/jeffjames/Documents/DotNet/AppTypesDemo/Managemate/Components/Pages/auth/SignUp.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9hdXRoL1NpZ25VcC5yYXpvcg==
+[C:/Users/gathu/Managemate/Components/Pages/auth/Verify.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xhdXRoXFZlcmlmeS5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/jeffjames/Documents/DotNet/AppTypesDemo/Managemate/Components/Pages/auth/Verify.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9hdXRoL1ZlcmlmeS5yYXpvcg==
+[C:/Users/gathu/Managemate/Components/Pages/Calendar.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xDYWxlbmRhci5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/jeffjames/Documents/DotNet/AppTypesDemo/Managemate/Components/Pages/Calendar.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9DYWxlbmRhci5yYXpvcg==
+[C:/Users/gathu/Managemate/Components/Pages/Counter.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xDb3VudGVyLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/jeffjames/Documents/DotNet/AppTypesDemo/Managemate/Components/Pages/Counter.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9Db3VudGVyLnJhem9y
+[C:/Users/gathu/Managemate/Components/Pages/Dashboard.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xEYXNoYm9hcmQucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/jeffjames/Documents/DotNet/AppTypesDemo/Managemate/Components/Pages/Dashboard.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9EYXNoYm9hcmQucmF6b3I=
+[C:/Users/gathu/Managemate/Components/Pages/Employee/Analytics old.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xFbXBsb3llZVxBbmFseXRpY3Mgb2xkLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/jeffjames/Documents/DotNet/AppTypesDemo/Managemate/Components/Pages/Employee/Analytics old.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9FbXBsb3llZS9BbmFseXRpY3Mgb2xkLnJhem9y
+[C:/Users/gathu/Managemate/Components/Pages/Employee/Analytics.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xFbXBsb3llZVxBbmFseXRpY3MucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/jeffjames/Documents/DotNet/AppTypesDemo/Managemate/Components/Pages/Employee/Analytics.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9FbXBsb3llZS9BbmFseXRpY3MucmF6b3I=
+[C:/Users/gathu/Managemate/Components/Pages/Employee/Dashboard.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xFbXBsb3llZVxEYXNoYm9hcmQucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/jeffjames/Documents/DotNet/AppTypesDemo/Managemate/Components/Pages/Employee/Dashboard.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9FbXBsb3llZS9EYXNoYm9hcmQucmF6b3I=
+[C:/Users/gathu/Managemate/Components/Pages/Employee/SkillsSelection.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xFbXBsb3llZVxTa2lsbHNTZWxlY3Rpb24ucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/jeffjames/Documents/DotNet/AppTypesDemo/Managemate/Components/Pages/Employee/SkillsSelection.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9FbXBsb3llZS9Ta2lsbHNTZWxlY3Rpb24ucmF6b3I=
+[C:/Users/gathu/Managemate/Components/Pages/Employee/Tasks.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xFbXBsb3llZVxUYXNrcy5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/jeffjames/Documents/DotNet/AppTypesDemo/Managemate/Components/Pages/Employee/Tasks.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9FbXBsb3llZS9UYXNrcy5yYXpvcg==
+[C:/Users/gathu/Managemate/Components/Pages/Error.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xFcnJvci5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/jeffjames/Documents/DotNet/AppTypesDemo/Managemate/Components/Pages/Error.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9FcnJvci5yYXpvcg==
+[C:/Users/gathu/Managemate/Components/Pages/Home.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xIb21lLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/jeffjames/Documents/DotNet/AppTypesDemo/Managemate/Components/Pages/Home.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9Ib21lLnJhem9y
+[C:/Users/gathu/Managemate/Components/Pages/Manager/Analytics(with charts).razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xNYW5hZ2VyXEFuYWx5dGljcyh3aXRoIGNoYXJ0cykucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/jeffjames/Documents/DotNet/AppTypesDemo/Managemate/Components/Pages/Manager/Analytics(with charts).razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9NYW5hZ2VyL0FuYWx5dGljcyh3aXRoIGNoYXJ0cykucmF6b3I=
+[C:/Users/gathu/Managemate/Components/Pages/Manager/Dashboard.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xNYW5hZ2VyXERhc2hib2FyZC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/jeffjames/Documents/DotNet/AppTypesDemo/Managemate/Components/Pages/Manager/Dashboard.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9NYW5hZ2VyL0Rhc2hib2FyZC5yYXpvcg==
+[C:/Users/gathu/Managemate/Components/Pages/Manager/TaskManager.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xNYW5hZ2VyXFRhc2tNYW5hZ2VyLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/jeffjames/Documents/DotNet/AppTypesDemo/Managemate/Components/Pages/Manager/TaskManager.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9NYW5hZ2VyL1Rhc2tNYW5hZ2VyLnJhem9y
+[C:/Users/gathu/Managemate/Components/Pages/Profile.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xQcm9maWxlLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/jeffjames/Documents/DotNet/AppTypesDemo/Managemate/Components/Pages/Profile.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9Qcm9maWxlLnJhem9y
+[C:/Users/gathu/Managemate/Components/Pages/Weather.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xXZWF0aGVyLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/jeffjames/Documents/DotNet/AppTypesDemo/Managemate/Components/Pages/Weather.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9XZWF0aGVyLnJhem9y
+[C:/Users/gathu/Managemate/Components/Routes.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xSb3V0ZXMucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/jeffjames/Documents/DotNet/AppTypesDemo/Managemate/Components/Routes.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9Sb3V0ZXMucmF6b3I=
+[C:/Users/gathu/Managemate/Components/_Imports.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xfSW1wb3J0cy5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/jeffjames/Documents/DotNet/AppTypesDemo/Managemate/Components/_Imports.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9fSW1wb3J0cy5yYXpvcg==
-build_metadata.AdditionalFiles.CssScope = 
+[C:/Users/gathu/Managemate/Components/Layout/MainLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xMYXlvdXRcTWFpbkxheW91dC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-5771nzp6jt
 
-[/home/jeffjames/Documents/DotNet/AppTypesDemo/Managemate/Components/Layout/MainLayout.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9MYXlvdXQvTWFpbkxheW91dC5yYXpvcg==
-build_metadata.AdditionalFiles.CssScope = b-zfulo6ozff
+[C:/Users/gathu/Managemate/Components/Layout/NavMenu.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xMYXlvdXRcTmF2TWVudS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-2mwut95qto
 
-[/home/jeffjames/Documents/DotNet/AppTypesDemo/Managemate/Components/Layout/NavMenu.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9MYXlvdXQvTmF2TWVudS5yYXpvcg==
-build_metadata.AdditionalFiles.CssScope = b-rzzgicj429
+[C:/Users/gathu/Managemate/Components/Layout/NoSidebar.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xMYXlvdXRcTm9TaWRlYmFyLnJhem9y
+build_metadata.AdditionalFiles.CssScope = b-mva7thfjlw
 
-[/home/jeffjames/Documents/DotNet/AppTypesDemo/Managemate/Components/Layout/NoSidebar.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9MYXlvdXQvTm9TaWRlYmFyLnJhem9y
-build_metadata.AdditionalFiles.CssScope = b-m7oy57x1ro
-
-[/home/jeffjames/Documents/DotNet/AppTypesDemo/Managemate/Components/Pages/Manager/Analytics.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9NYW5hZ2VyL0FuYWx5dGljcy5yYXpvcg==
-build_metadata.AdditionalFiles.CssScope = b-2rz0c8l7rp
+[C:/Users/gathu/Managemate/Components/Pages/Manager/Analytics.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xNYW5hZ2VyXEFuYWx5dGljcy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-7zph8rdv7e

@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Managemate.Migrations
 {
     /// <inheritdoc />
-    public partial class AllModelsInPlace : Migration
+    public partial class remodelled : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -31,34 +31,21 @@ namespace Managemate.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "Meetings",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Agenda = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    Date = table.Column<DateTime>(type: "datetime(6)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Meetings", x => x.Id);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
-
-            migrationBuilder.CreateTable(
                 name: "Users",
                 columns: table => new
                 {
                     UserId = table.Column<string>(type: "varchar(255)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     UserType = table.Column<int>(type: "int", nullable: false),
-                    Email = table.Column<string>(type: "longtext", nullable: false)
+                    Email = table.Column<string>(type: "varchar(255)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Skills = table.Column<string>(type: "longtext", nullable: false)
+                    Skills = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     JoinedOn = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    MinWorkingHours = table.Column<int>(type: "int", nullable: false)
+                    Otp = table.Column<int>(type: "int", nullable: true),
+                    MinWorkingHours = table.Column<int>(type: "int", nullable: false),
+                    Password = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
                 {
@@ -95,28 +82,23 @@ namespace Managemate.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "MeetingParticipants",
+                name: "Meetings",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    MeetingId = table.Column<int>(type: "int", nullable: false),
-                    ParticipantId = table.Column<string>(type: "varchar(255)", nullable: false)
+                    Agenda = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    NotificationSent = table.Column<bool>(type: "tinyint(1)", nullable: false)
+                    Date = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    OwnerId = table.Column<string>(type: "varchar(255)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_MeetingParticipants", x => x.Id);
+                    table.PrimaryKey("PK_Meetings", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_MeetingParticipants_Meetings_MeetingId",
-                        column: x => x.MeetingId,
-                        principalTable: "Meetings",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_MeetingParticipants_Users_ParticipantId",
-                        column: x => x.ParticipantId,
+                        name: "FK_Meetings_Users_OwnerId",
+                        column: x => x.OwnerId,
                         principalTable: "Users",
                         principalColumn: "UserId",
                         onDelete: ReferentialAction.Cascade);
@@ -139,7 +121,8 @@ namespace Managemate.Migrations
                     Status = table.Column<int>(type: "int", nullable: false),
                     CreatedById = table.Column<string>(type: "varchar(255)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Review = table.Column<string>(type: "longtext", nullable: false)
+                    Rating = table.Column<int>(type: "int", nullable: true),
+                    Review = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     DepartmentId = table.Column<int>(type: "int", nullable: true)
                 },
@@ -168,9 +151,8 @@ namespace Managemate.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     EmployeeId = table.Column<string>(type: "varchar(255)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    CheckInTime = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    CheckoutTime = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    TotalWorkingHours = table.Column<int>(type: "int", nullable: false)
+                    LogDate = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    TotalMinutesWorked = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -178,6 +160,35 @@ namespace Managemate.Migrations
                     table.ForeignKey(
                         name: "FK_WorkLogs_Users_EmployeeId",
                         column: x => x.EmployeeId,
+                        principalTable: "Users",
+                        principalColumn: "UserId",
+                        onDelete: ReferentialAction.Cascade);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "MeetingParticipants",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    MeetingId = table.Column<int>(type: "int", nullable: false),
+                    ParticipantId = table.Column<string>(type: "varchar(255)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    NotificationSent = table.Column<bool>(type: "tinyint(1)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_MeetingParticipants", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_MeetingParticipants_Meetings_MeetingId",
+                        column: x => x.MeetingId,
+                        principalTable: "Meetings",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_MeetingParticipants_Users_ParticipantId",
+                        column: x => x.ParticipantId,
                         principalTable: "Users",
                         principalColumn: "UserId",
                         onDelete: ReferentialAction.Cascade);
@@ -213,6 +224,28 @@ namespace Managemate.Migrations
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
+            migrationBuilder.CreateTable(
+                name: "WorkSessions",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    WorkLogId = table.Column<int>(type: "int", nullable: false),
+                    CheckInTime = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    CheckoutTime = table.Column<DateTime>(type: "datetime(6)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_WorkSessions", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_WorkSessions_WorkLogs_WorkLogId",
+                        column: x => x.WorkLogId,
+                        principalTable: "WorkLogs",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
             migrationBuilder.CreateIndex(
                 name: "IX_DepartmentMembers_DepartmentId",
                 table: "DepartmentMembers",
@@ -234,6 +267,11 @@ namespace Managemate.Migrations
                 column: "ParticipantId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Meetings_OwnerId",
+                table: "Meetings",
+                column: "OwnerId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_TasksToDo_CreatedById",
                 table: "TasksToDo",
                 column: "CreatedById");
@@ -242,6 +280,12 @@ namespace Managemate.Migrations
                 name: "IX_TasksToDo_DepartmentId",
                 table: "TasksToDo",
                 column: "DepartmentId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Users_Email",
+                table: "Users",
+                column: "Email",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_UserTasks_AssignedEmployeeId",
@@ -257,6 +301,11 @@ namespace Managemate.Migrations
                 name: "IX_WorkLogs_EmployeeId",
                 table: "WorkLogs",
                 column: "EmployeeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_WorkSessions_WorkLogId",
+                table: "WorkSessions",
+                column: "WorkLogId");
         }
 
         /// <inheritdoc />
@@ -272,13 +321,16 @@ namespace Managemate.Migrations
                 name: "UserTasks");
 
             migrationBuilder.DropTable(
-                name: "WorkLogs");
+                name: "WorkSessions");
 
             migrationBuilder.DropTable(
                 name: "Meetings");
 
             migrationBuilder.DropTable(
                 name: "TasksToDo");
+
+            migrationBuilder.DropTable(
+                name: "WorkLogs");
 
             migrationBuilder.DropTable(
                 name: "Departments");

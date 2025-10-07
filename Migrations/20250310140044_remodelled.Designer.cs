@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Managemate.Migrations
 {
     [DbContext(typeof(ManageMateDBConetxt))]
-    [Migration("20250208115146_AllModelsInPlace")]
-    partial class AllModelsInPlace
+    [Migration("20250310140044_remodelled")]
+    partial class remodelled
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -81,7 +81,13 @@ namespace Managemate.Migrations
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime(6)");
 
+                    b.Property<string>("OwnerId")
+                        .IsRequired()
+                        .HasColumnType("varchar(255)");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("OwnerId");
 
                     b.ToTable("Meetings");
                 });
@@ -136,8 +142,10 @@ namespace Managemate.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
+                    b.Property<int?>("Rating")
+                        .HasColumnType("int");
+
                     b.Property<string>("Review")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("SkillsNeeded")
@@ -163,7 +171,7 @@ namespace Managemate.Migrations
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasColumnType("varchar(255)");
 
                     b.Property<DateTime>("JoinedOn")
                         .HasColumnType("datetime(6)");
@@ -171,14 +179,23 @@ namespace Managemate.Migrations
                     b.Property<int>("MinWorkingHours")
                         .HasColumnType("int");
 
-                    b.Property<string>("Skills")
+                    b.Property<int?>("Otp")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Password")
                         .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Skills")
                         .HasColumnType("longtext");
 
                     b.Property<int>("UserType")
                         .HasColumnType("int");
 
                     b.HasKey("UserId");
+
+                    b.HasIndex("Email")
+                        .IsUnique();
 
                     b.ToTable("Users");
                 });
@@ -216,17 +233,14 @@ namespace Managemate.Migrations
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("CheckInTime")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<DateTime>("CheckoutTime")
-                        .HasColumnType("datetime(6)");
-
                     b.Property<string>("EmployeeId")
                         .IsRequired()
                         .HasColumnType("varchar(255)");
 
-                    b.Property<int>("TotalWorkingHours")
+                    b.Property<DateTime>("LogDate")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<int>("TotalMinutesWorked")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -234,6 +248,30 @@ namespace Managemate.Migrations
                     b.HasIndex("EmployeeId");
 
                     b.ToTable("WorkLogs");
+                });
+
+            modelBuilder.Entity("Managemate.Models.WorkSession", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CheckInTime")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<DateTime?>("CheckoutTime")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<int>("WorkLogId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("WorkLogId");
+
+                    b.ToTable("WorkSessions");
                 });
 
             modelBuilder.Entity("Managemate.Models.DepartmentMember", b =>
@@ -253,6 +291,17 @@ namespace Managemate.Migrations
                     b.Navigation("Department");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Managemate.Models.Meeting", b =>
+                {
+                    b.HasOne("Managemate.Models.User", "Owner")
+                        .WithMany("MeetingsCreated")
+                        .HasForeignKey("OwnerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Owner");
                 });
 
             modelBuilder.Entity("Managemate.Models.MeetingParticipant", b =>
@@ -319,6 +368,17 @@ namespace Managemate.Migrations
                     b.Navigation("Employee");
                 });
 
+            modelBuilder.Entity("Managemate.Models.WorkSession", b =>
+                {
+                    b.HasOne("Managemate.Models.WorkLog", "WorkLog")
+                        .WithMany("Sessions")
+                        .HasForeignKey("WorkLogId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("WorkLog");
+                });
+
             modelBuilder.Entity("Managemate.Models.Department", b =>
                 {
                     b.Navigation("Members");
@@ -344,7 +404,14 @@ namespace Managemate.Migrations
 
                     b.Navigation("Meetings");
 
+                    b.Navigation("MeetingsCreated");
+
                     b.Navigation("WorkLogs");
+                });
+
+            modelBuilder.Entity("Managemate.Models.WorkLog", b =>
+                {
+                    b.Navigation("Sessions");
                 });
 #pragma warning restore 612, 618
         }

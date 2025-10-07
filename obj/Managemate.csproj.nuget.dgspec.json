@@ -1,26 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "/home/jeffjames/Documents/DotNet/AppTypesDemo/Managemate/Managemate.csproj": {}
+    "C:\\Users\\gathu\\Managemate\\Managemate.csproj": {}
   },
   "projects": {
-    "/home/jeffjames/Documents/DotNet/AppTypesDemo/Managemate/Managemate.csproj": {
+    "C:\\Users\\gathu\\Managemate\\Managemate.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/jeffjames/Documents/DotNet/AppTypesDemo/Managemate/Managemate.csproj",
+        "projectUniqueName": "C:\\Users\\gathu\\Managemate\\Managemate.csproj",
         "projectName": "Managemate",
-        "projectPath": "/home/jeffjames/Documents/DotNet/AppTypesDemo/Managemate/Managemate.csproj",
-        "packagesPath": "/home/jeffjames/.nuget/packages/",
-        "outputPath": "/home/jeffjames/Documents/DotNet/AppTypesDemo/Managemate/obj/",
+        "projectPath": "C:\\Users\\gathu\\Managemate\\Managemate.csproj",
+        "packagesPath": "C:\\Users\\gathu\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\gathu\\Managemate\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/home/jeffjames/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\gathu\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net9.0"
         ],
         "sources": {
-          "/usr/lib/dotnet/library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -45,6 +44,10 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "dependencies": {
+            "BCrypt.Net-Next": {
+              "target": "Package",
+              "version": "[4.0.3, )"
+            },
             "Microsoft.EntityFrameworkCore.Design": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
@@ -85,7 +88,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/9.0.101/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.102/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

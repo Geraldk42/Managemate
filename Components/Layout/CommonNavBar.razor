@@ -82,9 +82,16 @@
 
 @if(!string.IsNullOrEmpty(userType) && !string.IsNullOrEmpty(userId)) {
     <ul class="selection">
-            <NavLink class="@GetActiveClass("/profile")" href="/profile" Match="NavLinkMatch.All">
+            @* <NavLink class="@GetActiveClass("/profile")" href="/profile" Match="NavLinkMatch.All">
                 Profile
-            </NavLink>
+            </NavLink> *@
+
+             <li>
+                <a href="/profile">
+                 Profile
+                </a>
+            </li>
+
 
             <li>
                 <a href="/@(userType == "TaskManager" ? "manager" : "employee")/tasks">
@@ -98,9 +105,16 @@
                 </a>
             </li>
 
-            <NavLink class="@GetActiveClass("/calendar")" href="/calendar" Match="NavLinkMatch.All">
+
+             <li>
+                <a href="/calendar">
+                 Calendar
+                </a>
+            </li>
+
+            @* <NavLink class="@GetActiveClass("/calendar")" href="/calendar" Match="NavLinkMatch.All">
                 Calendar
-            </NavLink>
+            </NavLink> *@
 
         </ul>
         <button class="header_button" @onclick="HandleLogout">@userName</button>
@@ -133,11 +147,11 @@
     }
 
 
-    private string GetActiveClass(string route)
+    @* private string GetActiveClass(string route)
     {
         var currentUri = NavigationManager.Uri;
         return currentUri.EndsWith(route, StringComparison.OrdinalIgnoreCase) ? "active" : "";
-    }
+    } *@
 
     private async Task HandleLogout()
     {

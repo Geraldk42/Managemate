@@ -259,10 +259,10 @@ else if (LoggedInUserType == UserType.TaskManager)
                         <img src="/images/employee.png" alt="@employee.Email">
                         <div class="employee-info">
                             <p>@employee.Email.Split('@')[0]</p>
-                            <p>
+                            @* <p>
                                 <span class="status @(employee.InProgressTasks > 0 ? "active" : "inactive")"></span>
                                 @(employee.InProgressTasks > 0 ? "Active" : "Inactive")
-                            </p>
+                            </p> *@
                             <p>Tasks: @employee.TotalTasks</p>
                         </div>
                     </div>

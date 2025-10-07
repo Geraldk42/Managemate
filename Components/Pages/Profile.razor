@@ -4,6 +4,7 @@
 @inject ManageMateDBConetxt DbContext
 @inject IJSRuntime JS
 @using Managemate.Models
+
 @using Microsoft.EntityFrameworkCore
 
 <PageTitle>Profile</PageTitle>
@@ -251,7 +252,7 @@ else
                     }
                     else if (currentUserType == UserType.TaskManager)
                     {
-                            <h3 class="section-title">Team Members</h3>
+                            <h3 class="section-title">Employees you manage</h3>
                     
                             @if (assignedEmployees.Count > 0)
                             {
@@ -275,7 +276,7 @@ else
                             }
                             else
                             {
-                                    <p>No team members assigned yet.</p>
+                                    <p>No employees under your management.</p>
                             }
                     }
                 </div>

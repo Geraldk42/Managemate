@@ -5,6 +5,7 @@
 @inject IJSRuntime JS
 @inject NavigationManager NavigationManager
 @using Managemate.Models
+@using Managemate.Helpers
 @using Microsoft.EntityFrameworkCore
 @using System.ComponentModel.DataAnnotations
 
@@ -512,16 +513,9 @@
     };
 
     private List<string> selectedSkills = new();
-    private List<string> availableSkills = new()
-{
-"Technical", "Problem Solving", "Cultural Awareness",
-"Analytical Thinking", "Customer Focus", "Initiative",
-"Project Management", "Negotiation Skills", "Conflict Resolution",
-"Graphic Design", "Programming", "Web Hosting",
-"Attention To Detail", "Time Management", "Collaboration",
-"Leadership", "Adaptability"
-};
+  
 
+ private List<string> availableSkills = SkillList.AvailableSkills;
     private void ToggleSkill(string skill)
     {
         if (selectedSkills.Contains(skill))
@@ -647,23 +641,44 @@ private void CloseReviewModal()
 
        // ==== START OF: our custom A not I algorithm 😂
 
+        @* Time Management,Attention To Detail,Collaboration *@
+        @* Attention To Detail,Time Manaements,Collaboration *@
+
     private async Task ShowAssignModal(TaskToDo task)
     {
-        selectedTask = task;
+       selectedTask = task;
+ var requiredSkills = task.SkillsNeeded?.Split(',')
+        .Select(s => s.Trim().ToLowerInvariant())
+        .Where(s => !string.IsNullOrEmpty(s))
+        .ToList() ?? new List<string>();
 
-      
-
-        var requiredSkills = task.SkillsNeeded?.Split(',').ToList() ?? new List<string>();
-
-        var employees = await DbContext.Users
+    var employees = await DbContext.Users
         .Where(u => u.UserType == UserType.Employee)
         .ToListAsync();
 
-        qualifiedEmployees = employees.Where(emp =>
+    qualifiedEmployees = employees.Where(emp =>
+    {
+        var employeeSkills = emp.Skills?.Split(',')
+            .Select(s => s.Trim().ToLowerInvariant())
+            .Where(s => !string.IsNullOrEmpty(s))
+            .ToList() ?? new List<string>();
+
+        foreach (var requiredSkill in requiredSkills)
         {
-            var employeeSkills = emp.Skills?.Split(',').ToList() ?? new List<string>();
-            return requiredSkills.All(skill => employeeSkills.Contains(skill));
-        }).ToList();
+            bool hasSkill = false;
+            foreach (var empSkill in employeeSkills)
+            {
+                if (empSkill == requiredSkill)
+                {
+                    hasSkill = true;
+                    break;
+                }
+            }
+            if (!hasSkill)
+                return false;
+        }
+        return true;
+    }).ToList();
 
         assignmentModel = new AssignmentModel();
         showAssignModal = true;
